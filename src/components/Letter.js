@@ -1,0 +1,1 @@
+let Letter = {    bindings: {      letterId: '<'    },    template: `<span>{{$ctrl.letter.body}}</span>`,    controller: function(MailsDataSvc) {    MailsDataSvc.getAllMails().then(letters => {        this.letter = letters.filter(i => i._id == this.letterId)[0];      })    }  }    export default Letter
