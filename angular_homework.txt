@@ -103,8 +103,4 @@ http://plnkr.co/edit/J85UleGqszEiB7ZWSK57?p=preview - plunker with mailboxes
 http://plnkr.co/edit/B4kQBhlxldo9A3vd7eTg?p=preview - for home work to many api calls
 http://plnkr.co/edit/mXLaACTCGUYOQk9msLUC?p=info - fork from previous plunker
 
-Степан, давайте на примере.
-Вот я создал пример домашнего задания
-http://plnkr.co/edit/mXLaACTCGUYOQk9msLUC?p=info
-Проблема его в том, что при переключении ящиков, делается один и тот же запрос чтобы получить все ящики и потом отображаются только письма для определенного ящика.
-Я так понимаю, что в этом случае должен быть один стейт который в качестве параметров будет получать ид ящика и ид письма и отображать правильное письмо. Вложенные стейты тут не подходят...
+ДЗ http://plnkr.co/edit/epQo6D9Kxl7Ynbv7Fkwc?p=info
