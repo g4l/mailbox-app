@@ -1,4 +1,4 @@
-https://github.com/yGazhala/mail-app - пример проекта
+﻿https://github.com/yGazhala/mail-app - пример проекта
 https://github.com/hraboviyvadim/mailApp
 ================Первое занятие===================================
 ДЗ:
@@ -104,3 +104,16 @@ http://plnkr.co/edit/B4kQBhlxldo9A3vd7eTg?p=preview - for home work to many api 
 http://plnkr.co/edit/mXLaACTCGUYOQk9msLUC?p=info - fork from previous plunker
 
 ДЗ http://plnkr.co/edit/epQo6D9Kxl7Ynbv7Fkwc?p=info
+
+========================Пятое занятие==============================
+http://plnkr.co/edit/epQo6D9Kxl7Ynbv7Fkwc?p=info - работает, но я запутался в роутерах, есть вопросы в коде
+http://plnkr.co/edit/kRRvbq?p=preview - прикольный планкер с роутами
+
+http://plnkr.co/edit/xYaTlI5tbx8bnabL2owr?p=preview
+
+- 2 states: login, users
+- users: resolve с проверкой авторизации
+
+ДЗ1: авторизация на resolve с 2мя стейтами
+ http://plnkr.co/edit/xYaTlI5tbx8bnabL2owr?p=preview
+ДЗ2: почитать о концептах и взаимосвязях - http://stepansuvorov.com/blog/2015/04/angularjs-concept-diagram/
