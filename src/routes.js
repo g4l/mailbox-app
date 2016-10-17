@@ -2,7 +2,7 @@ routerConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 function routerConfig($stateProvider, $urlRouterProvider) {
 
   $stateProvider.state('mailboxes', {
-    url: 'mailboxes',
+    url: '/mailboxes',
     template: `<mailboxes></mailboxes>`,
   })
   $stateProvider.state('mailbox', {
@@ -15,7 +15,7 @@ function routerConfig($stateProvider, $urlRouterProvider) {
   })
   $stateProvider.state('letter', {
     parent: 'mailbox',
-    url: '/letters/:letterId',
+    url: '/:letterId',
     template: `<letter letter-id="letterId"></letter>`,
     controller: function($stateParams, $scope) {
       $scope.letterId = $stateParams.letterId;
