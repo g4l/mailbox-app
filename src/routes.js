@@ -21,6 +21,7 @@ function routerConfig($stateProvider, $urlRouterProvider) {
       $scope.letterId = $stateParams.letterId;
     }
   })
+   $urlRouterProvider.when('', '/mailboxes');
 }
 
 export default routerConfig;
