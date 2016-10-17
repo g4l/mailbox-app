@@ -14,6 +14,7 @@ module.exports = {
 				exclude: /node_modules/,
 				loaders: ['babel']				
 			},
+			{ test: /\.svg$/i, loader: 'inline' }
 			/*{
 				test: /\.css$/,			
 				loader: ExtractTextPlugin.extract('css')
@@ -26,4 +27,11 @@ module.exports = {
 	},
 	
 	//plugins: [ new ExtractTextPlugin('app.css', { allChunks: true }) ],
+	 /* svgoConfig: {
+    plugins: [
+      { cleanupAttrs: true },
+      { removeStyleElement: true },
+      { removeAttrs: { attrs: '(xmlns|fill|stroke)' } }
+    ]
+  }*/
 }

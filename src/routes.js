@@ -5,6 +5,16 @@ function routerConfig($stateProvider, $urlRouterProvider) {
     url: '/mailboxes',
     template: `<mailboxes></mailboxes>`,
   })
+  $stateProvider.state('create', {
+	parent: 'mailboxes',
+    url: '/create',
+    template: `<h3>Create new mail</h3>`,
+  })
+  $stateProvider.state('contacts', {
+	parent: 'mailboxes',
+    url: '/contacts',
+    template: `<h3>Contacts</h3>`,
+  })
   $stateProvider.state('mailbox', {
     parent: 'mailboxes',
     url: '/:mailboxId',

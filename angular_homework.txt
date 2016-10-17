@@ -117,3 +117,6 @@ http://plnkr.co/edit/xYaTlI5tbx8bnabL2owr?p=preview
 ДЗ1: авторизация на resolve с 2мя стейтами
  http://plnkr.co/edit/xYaTlI5tbx8bnabL2owr?p=preview
 ДЗ2: почитать о концептах и взаимосвязях - http://stepansuvorov.com/blog/2015/04/angularjs-concept-diagram/
+
+
+вопросы http://plnkr.co/edit/lbwylllYn51m2x2TTNoD?p=info
