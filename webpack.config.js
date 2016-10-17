@@ -14,7 +14,7 @@ module.exports = {
 				exclude: /node_modules/,
 				loaders: ['babel']				
 			},
-			{ test: /\.svg$/i, loader: 'inline' }
+			//{ test: /\.svg$/i, loader: 'inline' }
 			/*{
 				test: /\.css$/,			
 				loader: ExtractTextPlugin.extract('css')
