@@ -1,4 +1,5 @@
-function MailsDataSvc($http) {
+angular.module('mailbox')
+.service('MailsDataSvc', function($http) {
 	let mails;
 	let mailboxes;
   this.getAllMails = () => {
@@ -18,6 +19,4 @@ function MailsDataSvc($http) {
    this.deleteMail = letterId => {
 	return $http.delete('http://test-api.javascript.ru/v1/vmerkotan/letters/' + letterId);	
    }
-}
-
-export default MailsDataSvc
+})

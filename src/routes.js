@@ -1,5 +1,5 @@
-routerConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
-function routerConfig($stateProvider, $urlRouterProvider) {
+angular.module('mailbox')
+.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider.state('mailboxes', {
     url: '/mailboxes',
@@ -32,6 +32,4 @@ function routerConfig($stateProvider, $urlRouterProvider) {
     }
   })
    $urlRouterProvider.when('', '/mailboxes');
-}
-
-export default routerConfig;
+})
