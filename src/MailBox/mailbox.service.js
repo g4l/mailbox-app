@@ -21,6 +21,7 @@ angular.module('mailbox')
    }
    
    this.moveToTrash = (letterId, letter) => {
+	 mails = null;
 	return $http.patch('//test-api.javascript.ru/v1/vmerkotan/letters/' + letterId + '?delay=1000', letter);	
    }
    
