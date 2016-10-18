@@ -26,6 +26,7 @@ angular.module('mailbox')
 					$scope.$emit('showNotification', "Letter was deleted successfully.");
 				})
 				.catch(error => {
+					console.log("letter component error in deleteMail >>>>>", error);
 					$state.go('^');
 					this.deleting = false;
 					$scope.$emit('showError', error.status + ' ' + error.statusText);
@@ -38,6 +39,7 @@ angular.module('mailbox')
 					$scope.$emit('showNotification', "Letter was moved to trash mailbox successfully.");
 				})
 				.catch(error => {
+					console.log("letter component error in moveToTrash >>>>>", error);
 					$state.go('^');
 					this.deleting = false;
 					$scope.$emit('showError', error.status + ' ' + error.statusText);

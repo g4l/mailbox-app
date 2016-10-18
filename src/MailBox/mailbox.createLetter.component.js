@@ -23,7 +23,8 @@ angular.module('mailbox')
 								$scope.$emit('stopLoading');
 								$scope.$emit('showNotification', "Letter was sent successfully. You can find it in sent mailbox");
 							})
-							.catch(error => {			
+							.catch(error => {		
+								console.log("createLetter component error >>>>>", error);
 								$scope.$emit('stopLoading');
 								$scope.$emit('showError', error.status + ' ' + error.statusText);			
 							})

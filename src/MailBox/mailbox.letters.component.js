@@ -11,6 +11,7 @@
 		$scope.$emit('stopLoading');
       })
 	  .catch(error => {
+			console.log("letters component error >>>>>", error);
 			$scope.$emit('stopLoading');
 			$scope.$emit('showError', error.status + ' ' + error.statusText);			
 		})
