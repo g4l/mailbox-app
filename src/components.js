@@ -74,21 +74,40 @@ angular.module('mailbox')
       </div>
     </div>
     <div class="slds-modal__footer">      
-      <button class="slds-button slds-button--brand" ng-click="$ctrl.deleteMail($ctrl.letter._id)">Delete</button>
+      <button class="slds-button slds-button--brand" ng-click="$ctrl.deleteMail($ctrl.letter._id)" ng-disabled="$ctrl.deleting">Delete</button>
     </div>
   </div>
 </div>
 <div class="slds-backdrop slds-backdrop--open"></div>`,
-    controller: function($state, MailsDataSvc) {
+    controller: function($state, $scope, MailsDataSvc) {
+		this.deleting = false;
 		MailsDataSvc.getAllMails().then(letters => {
 			this.letter = letters.find(i => i._id == this.letterId);
 		})
+		MailsDataSvc.getAllMailboxes()
+			.then(mailboxes => {
+				this.trashMailbox = mailboxes.find(i => i.title.toUpperCase() == 'TRASH')
+				this.sentMailbox = mailboxes.find(i => i.title.toUpperCase() == 'SENT')
+			})
 		this.goBack = function() {
 			$state.go('^');
 		}
-		this.deleteMail = function(letterId) {			
-			MailsDataSvc.deleteMail(this.letter._id);
-			$state.go('^');
+		this.deleteMail = function(letterId) {
+			this.deleting = true;
+			if(this.letter.mailbox == this.trashMailbox._id) {
+				MailsDataSvc.deleteMail(this.letter._id).then( () => {
+					$scope.$emit('deleteLetter', letterId);
+					$state.go('^');
+					this.deleting = false;
+				});
+			} else {
+				MailsDataSvc.moveToTrash(this.letter._id, { mailbox: this.trashMailbox._id }).then( () => {
+					$scope.$emit('deleteLetter', letterId);
+					$state.go('^');
+					this.deleting = false;
+				});
+			}
+			
 		}
     }
   })
@@ -102,9 +121,62 @@ angular.module('mailbox')
 				 </div>
 				 <ui-view></ui-view>
 				</div>`,
-    controller: function(MailsDataSvc) {
+    controller: function($scope, MailsDataSvc) {
       MailsDataSvc.getAllMails().then(letters => {
         this.letters = letters.filter(i => i.mailbox == this.mailboxId);
       })
+	  $scope.$on('deleteLetter', function(name, letterId){
+		//почему через this.letters не работает? 
+		$scope.$ctrl.letters = $scope.$ctrl.letters.filter( i => i._id != letterId);
+	  });
     }
+  })
+.component("createLetter",{ 
+	controller : function(MailsDataSvc) {		
+		MailsDataSvc.getAllMailboxes()
+        .then(mailboxes => {
+          this.sentMailbox = mailboxes.find(i => i.title.toUpperCase() == 'SENT')
+        })
+		this.to = "";
+		this.subject = "";
+		this.body = "";
+				
+		this.sendEmail = function() {
+		
+			MailsDataSvc.saveLetter({ subject: this.subject, to: this.to, body: this.body, mailbox: this.sentMailbox._id})
+						.then( () => {
+								this.to = "";
+								this.subject = "";
+								this.body = "";
+								this.addMailForm.$setPristine();
+								this.addMailForm.$setUntouched();
+							})
+		}
+		
+	},	
+	template: `<form name="$ctrl.addMailForm" ng-submit="$ctrl.sendEmail()">
+				<div class="slds-form--stacked">
+				  <div class="slds-form-element">
+					<label class="slds-form-element__label" for="mail">
+					<abbr class="slds-required" title="required">*</abbr> To</label>
+					<div class="slds-form-element__control">
+					  <input ng-required="true" id="mail" class="slds-input" type="email" ng-model="$ctrl.to"/>
+					</div>
+				  </div>
+				  <div class="slds-form-element">
+					<label class="slds-form-element__label" for="mail-subject">
+					<abbr class="slds-required" title="required">*</abbr> Subject</label>
+					<div class="slds-form-element__control">
+					  <input ng-required="true" id="mail-subject" class="slds-input" ng-model="$ctrl.subject"/>
+					</div>
+				  </div>
+				  <div class="slds-form-element">
+				  <label class="slds-form-element__label" for="body">Body</label>
+				  <div class="slds-form-element__control">
+					<textarea id="body" class="slds-textarea"rows="10" ng-model="$ctrl.body"></textarea>
+				  </div>
+				</div>
+					<button type="submit" class="slds-button slds-button--brand slds-m-top--x-small slds-float--right">Send</button>		  
+				</div>	
+			</form>`,   
   })

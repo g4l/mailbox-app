@@ -2,3 +2,7 @@
 	border-bottom: 1px solid #d8dde6;
 	cursor: pointer;
 }
+
+.ng-pristine .ng-invalid-required {
+    box-shadow: none;
+}

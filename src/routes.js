@@ -8,7 +8,15 @@ angular.module('mailbox')
   $stateProvider.state('create', {
 	parent: 'mailboxes',
     url: '/create',
-    template: `<h3>Create new mail</h3>`,
+    template: `	<table class="slds-table slds-table--bordered slds-table--cell-buffer slds-no-row-hover">
+				  <tbody>
+					<tr>
+					  <td >
+						<create-letter></create-letter>
+					  </td>      
+					</tr>
+				  </tbody>
+				</table>`,
   })
   $stateProvider.state('contacts', {
 	parent: 'mailboxes',
