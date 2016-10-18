@@ -1,0 +1,76 @@
+<!--article class="slds-card slds-card--narrow">
+  <div class="slds-card__header slds-grid">
+    <header class="slds-media slds-media--center slds-has-flexi-truncate">
+      <div class="slds-media__figure">
+        <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact slds-icon--small">
+          <use xlink:href="./assets/icons/standard-sprite/svg/symbols.svg#contact"></use>
+        </svg>
+      </div>
+      <div class="slds-media__body slds-truncate">
+        <h2>
+          <a href="javascript:void(0);" class="slds-text-link--reset">
+            <span class="slds-text-heading--small">{{$ctrl.contact.fullName}}</span>
+          </a>
+        </h2>
+      </div>
+    </header>
+  </div>
+  <div class="slds-card__body">
+	<span>{{$ctrl.contact.email}}</span>
+	<span>{{$ctrl.contact.birthdate}}</span>
+	<span>{{$ctrl.contact.gender}}</span>
+	<span>{{$ctrl.contact.address}}</span>
+  </div>
+  </article-->
+  <article class="slds-card slds-card--narrow">
+  <div class="slds-card__header slds-grid">
+    <header class="slds-media slds-media--center slds-has-flexi-truncate">
+      <div class="slds-media__figure">
+        <span class="slds-avatar slds-avatar--medium">
+		  <img ng-src={{$ctrl.contact.avatarUrl}} alt={{$ctrl.contact.fullName}} />
+		</span>
+      </div>
+      <div class="slds-media__body slds-truncate">
+        <h2>
+          <a href="javascript:void(0);" class="slds-text-link--reset">
+            <span class="slds-text-heading--small">{{$ctrl.contact.fullName}}</span>
+          </a>
+        </h2>
+      </div>
+    </header>
+  </div>
+  <div class="slds-card__body">
+    <div class="slds-card__body--inner">
+      <div class="slds-tile">
+        <div class="slds-tile__detail slds-text-body--small">
+          <dl class="slds-dl--horizontal">
+            <dt class="slds-dl--horizontal__label">
+              <span class="slds-truncate" title="Type">Email:</span>
+            </dt>
+            <dd class="slds-dl--horizontal__detail slds-tile__meta">
+              <span class="slds-truncate" title="Visit">{{$ctrl.contact.email}}</span>
+            </dd>
+            <dt class="slds-dl--horizontal__label">
+              <span class="slds-truncate" title="Date">Birthdate:</span>
+            </dt>
+            <dd class="slds-dl--horizontal__detail slds-tile__meta">
+              <span class="slds-truncate" title="1/31/15 3:45PM">{{$ctrl.contact.birthdate | date:'yyyy-MM-dd'}}</span>
+            </dd>
+			<dt class="slds-dl--horizontal__label">
+              <span class="slds-truncate" title="Date">Gender:</span>
+            </dt>
+            <dd class="slds-dl--horizontal__detail slds-tile__meta">
+              <span class="slds-truncate" title="1/31/15 3:45PM">{{$ctrl.contact.gender == 'F' ? "Female" : "Male"}}</span>
+            </dd>
+			<dt class="slds-dl--horizontal__label">
+              <span class="slds-truncate" title="Date">Address:</span>
+            </dt>
+            <dd class="slds-dl--horizontal__detail slds-tile__meta">
+              <span class="slds-truncate" title="1/31/15 3:45PM">{{$ctrl.contact.address}}</span>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
