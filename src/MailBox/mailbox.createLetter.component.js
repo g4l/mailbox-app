@@ -23,5 +23,5 @@ angular.module('mailbox')
 		}
 		
 	},	
-	templateUrl: 'src/Mailbox/templates/mailbox.createLetter.component.tpl.html'
+	templateUrl: 'src/MailBox/templates/mailbox.createLetter.component.tpl.html'
   })
