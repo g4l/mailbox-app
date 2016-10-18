@@ -30,8 +30,8 @@ angular.module('mailbox')
 	}
    
    //Можно ли так делать, чтобы данные всегда были актуальные?
-   $interval(function() {
+   /*$interval(function() {
 	mails = $http.get('//test-api.javascript.ru/v1/vmerkotan/letters?delay=1000')
                   .then(response => response.data);
-   }, 5000);
+   }, 5000);*/
 })
