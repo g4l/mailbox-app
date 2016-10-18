@@ -38,6 +38,6 @@ angular.module('mailbox')
     controller: function($stateParams, $scope) {
       $scope.letterId = $stateParams.letterId;
     }
-  })
-   $urlRouterProvider.when('', '/mailboxes');
+  })   
+   $urlRouterProvider.otherwise('/mailboxes');
 })
