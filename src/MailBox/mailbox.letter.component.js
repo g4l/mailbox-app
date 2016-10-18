@@ -2,12 +2,11 @@ angular.module('mailbox')
 .component('letter',{
     bindings: {
       letterId: '<'
-    },
-    templateUrl: 'src/MailBox/templates/mailbox.letter.component.tmpl.html',
+    },    
     controller: function($state, $scope, MailsDataSvc) {
-		this.deleting = false;
-		MailsDataSvc.getAllMails().then(letters => {
-			this.letter = letters.find(i => i._id == this.letterId);
+		this.deleting = false;		
+		MailsDataSvc.getAllMails().then(letters => {			
+			this.letter = letters.find(i => i._id == this.letterId)			
 		})
 		MailsDataSvc.getAllMailboxes()
 			.then(mailboxes => {
@@ -24,15 +23,28 @@ angular.module('mailbox')
 					$scope.$emit('deleteLetter', letterId);
 					$state.go('^');
 					this.deleting = false;
+					$scope.$emit('showNotification', "Letter was deleted successfully.");
+				})
+				.catch(error => {
+					$state.go('^');
+					this.deleting = false;
+					$scope.$emit('showError', error.status + ' ' + error.statusText);
 				});
 			} else {
 				MailsDataSvc.moveToTrash(this.letter._id, { mailbox: this.trashMailbox._id }).then( () => {
 					$scope.$emit('deleteLetter', letterId);
 					$state.go('^');
 					this.deleting = false;
+					$scope.$emit('showNotification', "Letter was moved to trash mailbox successfully.");
+				})
+				.catch(error => {
+					$state.go('^');
+					this.deleting = false;
+					$scope.$emit('showError', error.status + ' ' + error.statusText);
 				});
 			}
 			
 		}
-    }
+    },
+	templateUrl: 'src/MailBox/templates/mailbox.letter.component.tmpl.html'
   })

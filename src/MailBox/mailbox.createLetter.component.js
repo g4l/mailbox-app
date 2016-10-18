@@ -1,16 +1,18 @@
 angular.module('mailbox') 
 .component("createLetter",{ 
-	controller : function(MailsDataSvc) {		
+	controller : function($scope, MailsDataSvc) {		
 		MailsDataSvc.getAllMailboxes()
         .then(mailboxes => {
           this.sentMailbox = mailboxes.find(i => i.title.toUpperCase() == 'SENT')
         })
+		.catch(error => {			
+			$scope.$emit('showError', error.status + ' ' + error.statusText);			
+		})
 		this.to = "";
 		this.subject = "";
-		this.body = "";
-		this.saving = false;
+		this.body = "";		
 		this.sendEmail = function() {
-			this.saving = true;
+			$scope.$emit('startLoading');
 			MailsDataSvc.saveLetter({ subject: this.subject, to: this.to, body: this.body, mailbox: this.sentMailbox._id})
 						.then( () => {
 								this.to = "";
@@ -18,7 +20,12 @@ angular.module('mailbox')
 								this.body = "";
 								this.addMailForm.$setPristine();
 								this.addMailForm.$setUntouched();
-								this.saving = false;
+								$scope.$emit('stopLoading');
+								$scope.$emit('showNotification', "Letter was sent successfully. You can find it in sent mailbox");
+							})
+							.catch(error => {			
+								$scope.$emit('stopLoading');
+								$scope.$emit('showError', error.status + ' ' + error.statusText);			
 							})
 		}
 		

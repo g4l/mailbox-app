@@ -15,7 +15,8 @@
         <p>{{$ctrl.letter.body}}</p>		
       </div>
     </div>
-    <div class="slds-modal__footer">      
+    <div class="slds-modal__footer">   
+		<span class="slds-m-right--small" ng-if="$ctrl.deleting">Deleting...</span>
       <button class="slds-button slds-button--brand" ng-click="$ctrl.deleteMail($ctrl.letter._id)" ng-disabled="$ctrl.deleting">Delete</button>
     </div>
   </div>

@@ -6,3 +6,17 @@
 .ng-pristine .ng-invalid-required {
     box-shadow: none;
 }
+
+.mb-error-message {
+	color: white;
+	background-color: rgba(255,57,52,0.5);
+}
+
+.mb-error-message svg{
+	fill: currentColor;
+	cursor: pointer;
+}
+
+.slds-spinner_container {
+	z-index: 2;
+}

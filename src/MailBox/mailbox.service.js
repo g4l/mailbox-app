@@ -26,7 +26,7 @@ angular.module('mailbox')
    
    this.saveLetter = (mail) => {
 		mails = null;
-		return $http.post('//test-api.javascript.ru/v1/vmerkotan/letters/?delay=1000', mail);                  
+		return $http.post('//test-api.javascript.ru/v1/vmerkotan/letters/?delay=1000', mail);
 	}
    
    //Можно ли так делать, чтобы данные всегда были актуальные?

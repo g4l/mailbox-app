@@ -1,0 +1,14 @@
+<div class="slds-notify_container">
+  <div class="slds-notify slds-notify--toast" role="alert">
+    <span class="slds-assistive-text">Info</span>
+    <button class="slds-button slds-notify__close slds-button--icon-inverse" ng-click="$ctrl.hideNotification()">
+      <svg aria-hidden="true" class="slds-button__icon slds-button__icon--large">
+        <use xlink:href="./assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+      </svg>
+      <span class="slds-assistive-text">Close</span>
+    </button>
+    <div class="slds-notify__content">
+      <h2 class="slds-text-heading--small">{{$ctrl.notificationMessage}}</h2>
+    </div>
+  </div>
+</div>
