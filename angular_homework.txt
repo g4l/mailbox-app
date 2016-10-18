@@ -118,5 +118,13 @@ http://plnkr.co/edit/xYaTlI5tbx8bnabL2owr?p=preview
  http://plnkr.co/edit/xYaTlI5tbx8bnabL2owr?p=preview
 ДЗ2: почитать о концептах и взаимосвязях - http://stepansuvorov.com/blog/2015/04/angularjs-concept-diagram/
 
-
+===================Шестое занятие============================
+У меня вопрос по роутингам http://plnkr.co/edit/wnLMkVwfg0oIMeR8BEm5
 вопросы http://plnkr.co/edit/lbwylllYn51m2x2TTNoD?p=info
+http://jsfiddle.net/muh469po/
+http://stepansuvorov.com/blog/2014/09/angularjs-data-transfer/
+http://stepansuvorov.com/blog/2016/07/ui-router-deprecated-events-and-hooks/
+http://stepansuvorov.com/blog/2016/05/ui-router-default-child-for-abstract-state/
+http://stepansuvorov.com/blog/2014/04/angularjs-interceptors-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B/
+ДЗ1: прикручиваем авторизацию к своим проектам
+ДЗ2: (почитать) юнит-тесты. + посмотреть скринкаст.
