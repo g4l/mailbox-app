@@ -1,28 +1,4 @@
-<!--article class="slds-card slds-card--narrow">
-  <div class="slds-card__header slds-grid">
-    <header class="slds-media slds-media--center slds-has-flexi-truncate">
-      <div class="slds-media__figure">
-        <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact slds-icon--small">
-          <use xlink:href="./assets/icons/standard-sprite/svg/symbols.svg#contact"></use>
-        </svg>
-      </div>
-      <div class="slds-media__body slds-truncate">
-        <h2>
-          <a href="javascript:void(0);" class="slds-text-link--reset">
-            <span class="slds-text-heading--small">{{$ctrl.contact.fullName}}</span>
-          </a>
-        </h2>
-      </div>
-    </header>
-  </div>
-  <div class="slds-card__body">
-	<span>{{$ctrl.contact.email}}</span>
-	<span>{{$ctrl.contact.birthdate}}</span>
-	<span>{{$ctrl.contact.gender}}</span>
-	<span>{{$ctrl.contact.address}}</span>
-  </div>
-  </article-->
-  <article class="slds-card slds-card--narrow">
+  <article class="slds-card slds-card--narrow slds-m-vertical--small">
   <div class="slds-card__header slds-grid">
     <header class="slds-media slds-media--center slds-has-flexi-truncate">
       <div class="slds-media__figure">
@@ -73,4 +49,7 @@
       </div>
     </div>
   </div>
+  <div class="slds-card__footer">
+	<button class="slds-button slds-button--brand " ng-click="$ctrl.deleteContact()">Delete</button>
+  </div>  
 </article>

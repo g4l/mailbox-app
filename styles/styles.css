@@ -20,3 +20,13 @@
 .slds-spinner_container {
 	z-index: 2;
 }
+
+.slds-card.slds-card--narrow {
+	min-width: 480px;
+    max-width: 520px;
+}
+
+.contacts-container {
+	padding-left: 31%;
+	padding-right: 31%;
+}
