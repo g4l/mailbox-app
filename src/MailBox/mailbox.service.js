@@ -11,7 +11,7 @@ angular.module('mailbox')
     }
   this.getAllMailboxes = () => {
 	  if(!mailboxes) {
-		mailboxes = $http.get('http://test-api.javascript.ru/v1/vmerkotan/mailboxes?delay=1000')
+		mailboxes = $http.get('//test-api.javascript.ru/v1/vmerkotan/mailboxes?delay=1000')
 						.then(response => response.data)
 	  }
       return mailboxes;

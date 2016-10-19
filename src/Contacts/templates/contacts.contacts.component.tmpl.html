@@ -1,2 +1,6 @@
-
-	<contact ng-repeat="c in $ctrl.contacts" contact="c" delete-contact="$ctrl.deleteContact(c._id)"></contact>
+<div id="contacts-container" class="slds-m-top--small">
+	<create-contact save-contact="$ctrl.createUser(user)"></create-contact>
+	<div>
+		<contact ng-repeat="c in $ctrl.contacts" contact="c" delete-contact="$ctrl.deleteContact(c._id)"></contact>
+	</div>
+</div>

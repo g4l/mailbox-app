@@ -21,13 +21,14 @@
 	z-index: 2;
 }
 
-.slds-card.slds-card--narrow {
+.slds-card.slds-card--narrow, create-contact form {
 	min-width: 480px;
     max-width: 520px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-contacts, contact {
-	display: block;
+#contacts-container {
+	display:flex;
+	justify-content: space-around;
 }
