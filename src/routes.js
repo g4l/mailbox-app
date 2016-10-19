@@ -21,7 +21,7 @@ angular.module('mailbox')
   $stateProvider.state('contacts', {
 	parent: 'mailboxes',
     url: '/contacts',
-    template: `<div class="contacts-container"><contacts></contacts></div>`,
+    template: `<div><contacts></contacts></div>`,
   })
   $stateProvider.state('mailbox', {
     parent: 'mailboxes',

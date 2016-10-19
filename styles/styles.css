@@ -24,9 +24,10 @@
 .slds-card.slds-card--narrow {
 	min-width: 480px;
     max-width: 520px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-.contacts-container {
-	padding-left: 31%;
-	padding-right: 31%;
+contacts, contact {
+	display: block;
 }
