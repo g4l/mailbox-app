@@ -28,7 +28,9 @@
 	margin-right: auto;
 }
 
-#contacts-container {
-	display:flex;
-	justify-content: space-around;
+@media(min-width: 1024px) {
+    #contacts-container {
+		display:flex;
+		justify-content: space-around;
+	}
 }
