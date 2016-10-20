@@ -7,13 +7,14 @@
 	</head>
   <body ng-app="mailbox">
   
-  <div class="slds">		
-		<ui-view></ui-view>
+  <div class="slds">
+		<wrapper></wrapper>		
 	</div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
 	<script src="./src/main.js"></script>
 	<script src="./src/routes.js"></script>
+	<script src="./src/wrapper.js"></script>
 	<!-- MailBox modules -->
 	<script src="./src/MailBox/mailbox.createLetter.component.js"></script>
 	<script src="./src/MailBox/mailbox.letter.component.js"></script>
@@ -28,6 +29,10 @@
 	<script src="./src/Contacts/contacts.service.js"></script>
 	<script src="./src/Contacts/contacts.contact.component.js"></script>
 	<script src="./src/Contacts/contacts.createContact.component.js"></script>
+	<!--Auth module -->
+	<script src="./src/Auth/auth.login.component.js"></script>
+	<script src="./src/Auth/auth.service.js"></script>
 	
+
   </body>
 </html>

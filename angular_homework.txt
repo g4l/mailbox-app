@@ -121,6 +121,7 @@ http://plnkr.co/edit/xYaTlI5tbx8bnabL2owr?p=preview
 ===================Шестое занятие============================
 У меня вопрос по роутингам http://plnkr.co/edit/wnLMkVwfg0oIMeR8BEm5
 вопросы http://plnkr.co/edit/lbwylllYn51m2x2TTNoD?p=info
+https://plnkr.co/edit/0SmOb0HWXHz3ilImgSdp?p=preview - plunker with resolve
 http://jsfiddle.net/muh469po/
 http://stepansuvorov.com/blog/2014/09/angularjs-data-transfer/
 http://stepansuvorov.com/blog/2016/07/ui-router-deprecated-events-and-hooks/

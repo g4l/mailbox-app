@@ -1,9 +1,18 @@
 angular.module('mailbox')
 .config(function($stateProvider, $urlRouterProvider) {
-
+   $stateProvider.state('login', {
+    url: '/login',
+    template: `<login></login>`,
+  })
   $stateProvider.state('mailboxes', {
     url: '/mailboxes',
-    template: `<mailboxes></mailboxes>`,
+	resolve: {
+		isAuth: function(AuthSvc){
+			return AuthSvc.isAuthenticated();
+		}
+	},
+    template: `<mailboxes></mailboxes>`,	
+	
   })
   $stateProvider.state('create', {
 	parent: 'mailboxes',
@@ -39,5 +48,5 @@ angular.module('mailbox')
       $scope.letterId = $stateParams.letterId;
     }
   })   
-   $urlRouterProvider.otherwise('/mailboxes');
+   $urlRouterProvider.otherwise('/login');
 })

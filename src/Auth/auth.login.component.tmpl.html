@@ -1,0 +1,25 @@
+<div id="container" class="slds-align--absolute-center">
+		<span>login: me@test.com</span>
+		<span>password: qwerty</span>
+		<br/>
+		<form ng-submit="$ctrl.login()">
+		<div class="slds-form--stacked">
+		  <div class="slds-form-element">
+			<label class="slds-form-element__label" for="auth_mail">
+			<abbr class="slds-required" title="required">*</abbr> Login</label>
+			<div class="slds-form-element__control">
+			  <input required id="auth_mail" class="slds-input" type="email" placeholder="test@example.com" ng-model="$ctrl.email"/>
+			</div>
+		  </div>
+		  <div class="slds-form-element">
+			<label class="slds-form-element__label" for="authpass">
+			<abbr class="slds-required" title="required">*</abbr> Password</label>
+			<div class="slds-form-element__control">
+			  <input required id="pass" class="slds-input" type="password" ng-model="$ctrl.password"/>
+			</div>
+		  </div>	
+			<button type="submit" class="slds-button slds-button--brand slds-m-top--x-small slds-float--right"  ng-disabled="$ctrl.processing">Sign in</button>		  
+		</div>	
+		</form>
+	</div>	
+	
