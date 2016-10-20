@@ -11,13 +11,10 @@ angular.module('mailbox')
 			AuthSvc.setMail(this.email);
 			$state.go('mailboxes');
 		}
-		
 		 
-		 $scope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => {						
-				this.processing = false;
-			});
-		
-		
+		 $scope.$on('$stateChangeError', () => {						
+			this.processing = false;
+		});
 	},
 	templateUrl: 'src/Auth/auth.login.component.tmpl.html',
 })
