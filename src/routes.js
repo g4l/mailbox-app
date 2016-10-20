@@ -11,7 +11,7 @@ angular.module('mailbox')
 			return AuthSvc.isAuthenticated();
 		}
 	},
-    template: `<mailboxes></mailboxes>`,	
+    template: `<mailboxes></mailboxes>`,
 	
   })
   $stateProvider.state('create', {
@@ -48,5 +48,5 @@ angular.module('mailbox')
       $scope.letterId = $stateParams.letterId;
     }
   })   
-   $urlRouterProvider.otherwise('/login');
+   $urlRouterProvider.otherwise('/mailboxes');
 })
