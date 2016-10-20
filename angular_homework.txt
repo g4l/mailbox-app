@@ -129,3 +129,10 @@ http://stepansuvorov.com/blog/2016/05/ui-router-default-child-for-abstract-state
 http://stepansuvorov.com/blog/2014/04/angularjs-interceptors-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B/
 ДЗ1: прикручиваем авторизацию к своим проектам
 ДЗ2: (почитать) юнит-тесты. + посмотреть скринкаст.
+
+==================Седьмое занятие=============================
+https://docs.angularjs.org/api/ngMock
+http://jasmine.github.io/edge/introduction
+istanbul - инструмент для проверки покрытия кода тестами
+https://github.com/toddmotto/angular-styleguide/blob/master/i18n/ru-ru.md
+angular-translate
