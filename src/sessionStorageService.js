@@ -1,4 +1,4 @@
-angular.module('mailbox')
+angular.module('mailbox-app')
 .service('SessionStorageSrv', function($window) {	
 	
 	this.getItem = (key) => {

@@ -1,4 +1,4 @@
-angular.module('mailbox')
+angular.module('auth', [])
 .component('login', {
 	controller: function($scope, $log, $state, AuthSvc) {
 		this.password = "";
@@ -18,5 +18,5 @@ angular.module('mailbox')
 			this.processing = false;
 		});
 	},
-	templateUrl: 'src/Auth/auth.login.component.tmpl.html',
+	templateUrl: 'src/Auth/templates/auth.login.component.tmpl.html',
 })

@@ -1,4 +1,4 @@
-angular.module('mailbox')
+angular.module('contacts')
 .service('ContactsDataSvc', function($http, $interval) {	
   this.getAllContacts = () => {	  	
 		return $http.get('http://test-api.javascript.ru/v1/vmerkotan/users?delay=1000')

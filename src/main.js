@@ -1,1 +1,1 @@
-angular.module('mailbox', ['ui.router'])
+angular.module('mailbox-app', ['ui.router', 'contacts', 'mailbox', 'auth'])

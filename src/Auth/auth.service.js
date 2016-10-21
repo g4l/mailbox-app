@@ -1,4 +1,4 @@
-angular.module('mailbox')
+angular.module('auth')
 .service('AuthSvc', function($q, $timeout, LocalStorageSrv, SessionStorageSrv) {
 	let password = "", email = "", remember = false;
 	let storageKey = "mailbox_authenticated"

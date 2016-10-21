@@ -1,4 +1,4 @@
-angular.module('mailbox')
+angular.module('mailbox-app')
 	.component('wrapper', {
 		controller: function($scope, $log, $state) {		 
 		 $scope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => {					

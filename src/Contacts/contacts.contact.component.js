@@ -1,4 +1,4 @@
-angular.module('mailbox') 
+angular.module('contacts')
 .component('contact', {
 	bindings: {
 		contact: '<',

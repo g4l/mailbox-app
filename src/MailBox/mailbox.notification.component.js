@@ -1,4 +1,4 @@
-angular.module("mailbox")
+angular.module('mailbox')
 .component("mbNotification", {
 	bindings: {
 		notificationMessage:"<",
