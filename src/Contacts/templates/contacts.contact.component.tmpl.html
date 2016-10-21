@@ -50,6 +50,7 @@
     </div>
   </div>
   <div class="slds-card__footer">
-	<button class="slds-button slds-button--brand " ng-click="$ctrl.deleteContact()">Delete</button>
+	<span class="slds-m-right--small" ng-if="$ctrl.deleting">Deleting...</span>
+	<button class="slds-button slds-button--brand " ng-click="$ctrl.delete()" ng-disabled="$ctrl.deleting">Delete</button>
   </div>  
 </article>
