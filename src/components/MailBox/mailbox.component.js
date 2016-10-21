@@ -1,0 +1,1 @@
+import controller from './mailbox.controller.js';import template from './mailbox.html';import './mailbox.css';let MailBoxComponent = {	controller,	template}export default MailBoxComponent;

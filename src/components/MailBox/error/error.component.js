@@ -1,0 +1,1 @@
+import template from './error.html';import './error.css';let ErrorComponent = {	bindings: {		errorMessage: '<',		hideError: '&'	},	template}export default ErrorComponent;

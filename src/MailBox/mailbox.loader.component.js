@@ -1,1 +1,0 @@
-angular.module('mailbox') .component('mbLoader',{        templateUrl: 'src/MailBox/templates/mailbox.loader.component.tmpl.html'  })
