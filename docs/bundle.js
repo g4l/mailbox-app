@@ -37214,7 +37214,7 @@
 /* 20 */
 /***/ function(module, exports) {
 
-	module.exports = "<div id=\"contacts-container\" class=\"slds-m-top--small\">\n\t<create-contact save-contact=\"$ctrl.createUser(user)\"></create-contact>\n\t<div>\n\t\t<contact ng-repeat=\"c in $ctrl.contacts\" contact=\"c\" delete-contact=\"$ctrl.deleteContact(c._id)\"></contact>\n\t</div>\n</div>\n"
+	module.exports = "<div id=\"contacts-container\" class=\"slds-m-top--small\">\r\n\t<create-contact save-contact=\"$ctrl.createUser(user)\"></create-contact>\r\n\t<div>\r\n\t\t<contact ng-repeat=\"c in $ctrl.contacts\" contact=\"c\" delete-contact=\"$ctrl.deleteContact(c._id)\"></contact>\r\n\t</div>\r\n</div>\r\n"
 
 /***/ },
 /* 21 */
@@ -37328,7 +37328,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".slds-card.slds-card--narrow, create-contact form {\n\tmin-width: 480px;\n    max-width: 520px;\n\tmargin-left: auto;\n\tmargin-right: auto;\n}\n\n@media(min-width: 1024px) {\n    #contacts-container {\n\t\tdisplay:flex;\n\t\tjustify-content: space-around;\n\t}\n}\n", ""]);
+	exports.push([module.id, ".slds-card.slds-card--narrow, create-contact form {\r\n\tmin-width: 480px;\r\n    max-width: 520px;\r\n\tmargin-left: auto;\r\n\tmargin-right: auto;\r\n}\r\n\r\n@media(min-width: 1024px) {\r\n    #contacts-container {\r\n\t\tdisplay:flex;\r\n\t\tjustify-content: space-around;\r\n\t}\r\n}\r\n", ""]);
 	
 	// exports
 
@@ -37357,19 +37357,19 @@
 		_createClass(ContactsDataSvc, [{
 			key: 'getAllContacts',
 			value: function getAllContacts() {
-				return this.$http.get('http://test-api.javascript.ru/v1/vmerkotan/users?delay=1000').then(function (response) {
+				return this.$http.get('//test-api.javascript.ru/v1/vmerkotan/users?delay=1000').then(function (response) {
 					return response.data;
 				});
 			}
 		}, {
 			key: 'deleteContact',
 			value: function deleteContact(contactId) {
-				return this.$http.delete('http://test-api.javascript.ru/v1/vmerkotan/users/' + contactId + '?delay=1000');
+				return this.$http.delete('//test-api.javascript.ru/v1/vmerkotan/users/' + contactId + '?delay=1000');
 			}
 		}, {
 			key: 'createContact',
 			value: function createContact(contact) {
-				return this.$http.post('http://test-api.javascript.ru/v1/vmerkotan/users/?delay=1000', contact).then(function (response) {
+				return this.$http.post('//test-api.javascript.ru/v1/vmerkotan/users/?delay=1000', contact).then(function (response) {
 					return response.data;
 				});
 			}
@@ -37476,7 +37476,7 @@
 /* 28 */
 /***/ function(module, exports) {
 
-	module.exports = "  <article class=\"slds-card slds-card--narrow slds-m-vertical--small\">\n  <div class=\"slds-card__header slds-grid\">\n    <header class=\"slds-media slds-media--center slds-has-flexi-truncate\">\n      <div class=\"slds-media__figure\">\n        <span class=\"slds-avatar slds-avatar--medium\">\n\t\t  <img ng-src={{$ctrl.contact.avatarUrl}} alt={{$ctrl.contact.fullName}} />\n\t\t</span>\n      </div>\n      <div class=\"slds-media__body slds-truncate\">\n        <h2>\n          <a href=\"javascript:void(0);\" class=\"slds-text-link--reset\">\n            <span class=\"slds-text-heading--small\">{{$ctrl.contact.fullName}}</span>\n          </a>\n        </h2>\n      </div>\n    </header>\n  </div>\n  <div class=\"slds-card__body\">\n    <div class=\"slds-card__body--inner\">\n      <div class=\"slds-tile\">\n        <div class=\"slds-tile__detail slds-text-body--small\">\n          <dl class=\"slds-dl--horizontal\">\n            <dt class=\"slds-dl--horizontal__label\">\n              <span class=\"slds-truncate\" title=\"Type\">Email:</span>\n            </dt>\n            <dd class=\"slds-dl--horizontal__detail slds-tile__meta\">\n              <span class=\"slds-truncate\" title=\"Visit\">{{$ctrl.contact.email}}</span>\n            </dd>\n            <dt class=\"slds-dl--horizontal__label\">\n              <span class=\"slds-truncate\" title=\"Date\">Birthdate:</span>\n            </dt>\n            <dd class=\"slds-dl--horizontal__detail slds-tile__meta\">\n              <span class=\"slds-truncate\" title=\"1/31/15 3:45PM\">{{$ctrl.contact.birthdate | date:'yyyy-MM-dd'}}</span>\n            </dd>\n\t\t\t<dt class=\"slds-dl--horizontal__label\">\n              <span class=\"slds-truncate\" title=\"Date\">Gender:</span>\n            </dt>\n            <dd class=\"slds-dl--horizontal__detail slds-tile__meta\">\n              <span class=\"slds-truncate\" title=\"1/31/15 3:45PM\">{{$ctrl.contact.gender == 'F' ? \"Female\" : \"Male\"}}</span>\n            </dd>\n\t\t\t<dt class=\"slds-dl--horizontal__label\">\n              <span class=\"slds-truncate\" title=\"Date\">Address:</span>\n            </dt>\n            <dd class=\"slds-dl--horizontal__detail slds-tile__meta\">\n              <span class=\"slds-truncate\" title=\"1/31/15 3:45PM\">{{$ctrl.contact.address}}</span>\n            </dd>\n          </dl>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"slds-card__footer\">\n\t<span class=\"slds-m-right--small\" ng-if=\"$ctrl.deleting\">Deleting...</span>\n\t<button class=\"slds-button slds-button--brand \" ng-click=\"$ctrl.delete()\" ng-disabled=\"$ctrl.deleting\">Delete</button>\n  </div>  \n</article>"
+	module.exports = "  <article class=\"slds-card slds-card--narrow slds-m-vertical--small\">\r\n  <div class=\"slds-card__header slds-grid\">\r\n    <header class=\"slds-media slds-media--center slds-has-flexi-truncate\">\r\n      <div class=\"slds-media__figure\">\r\n        <span class=\"slds-avatar slds-avatar--medium\">\r\n\t\t  <img ng-src={{$ctrl.contact.avatarUrl}} alt={{$ctrl.contact.fullName}} />\r\n\t\t</span>\r\n      </div>\r\n      <div class=\"slds-media__body slds-truncate\">\r\n        <h2>\r\n          <a href=\"javascript:void(0);\" class=\"slds-text-link--reset\">\r\n            <span class=\"slds-text-heading--small\">{{$ctrl.contact.fullName}}</span>\r\n          </a>\r\n        </h2>\r\n      </div>\r\n    </header>\r\n  </div>\r\n  <div class=\"slds-card__body\">\r\n    <div class=\"slds-card__body--inner\">\r\n      <div class=\"slds-tile\">\r\n        <div class=\"slds-tile__detail slds-text-body--small\">\r\n          <dl class=\"slds-dl--horizontal\">\r\n            <dt class=\"slds-dl--horizontal__label\">\r\n              <span class=\"slds-truncate\" title=\"Type\">Email:</span>\r\n            </dt>\r\n            <dd class=\"slds-dl--horizontal__detail slds-tile__meta\">\r\n              <span class=\"slds-truncate\" title=\"Visit\">{{$ctrl.contact.email}}</span>\r\n            </dd>\r\n            <dt class=\"slds-dl--horizontal__label\">\r\n              <span class=\"slds-truncate\" title=\"Date\">Birthdate:</span>\r\n            </dt>\r\n            <dd class=\"slds-dl--horizontal__detail slds-tile__meta\">\r\n              <span class=\"slds-truncate\" title=\"1/31/15 3:45PM\">{{$ctrl.contact.birthdate | date:'yyyy-MM-dd'}}</span>\r\n            </dd>\r\n\t\t\t<dt class=\"slds-dl--horizontal__label\">\r\n              <span class=\"slds-truncate\" title=\"Date\">Gender:</span>\r\n            </dt>\r\n            <dd class=\"slds-dl--horizontal__detail slds-tile__meta\">\r\n              <span class=\"slds-truncate\" title=\"1/31/15 3:45PM\">{{$ctrl.contact.gender == 'F' ? \"Female\" : \"Male\"}}</span>\r\n            </dd>\r\n\t\t\t<dt class=\"slds-dl--horizontal__label\">\r\n              <span class=\"slds-truncate\" title=\"Date\">Address:</span>\r\n            </dt>\r\n            <dd class=\"slds-dl--horizontal__detail slds-tile__meta\">\r\n              <span class=\"slds-truncate\" title=\"1/31/15 3:45PM\">{{$ctrl.contact.address}}</span>\r\n            </dd>\r\n          </dl>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"slds-card__footer\">\r\n\t<span class=\"slds-m-right--small\" ng-if=\"$ctrl.deleting\">Deleting...</span>\r\n\t<button class=\"slds-button slds-button--brand \" ng-click=\"$ctrl.delete()\" ng-disabled=\"$ctrl.deleting\">Delete</button>\r\n  </div>  \r\n</article>"
 
 /***/ },
 /* 29 */
@@ -37896,7 +37896,7 @@
 			key: 'getAllMails',
 			value: function getAllMails() {
 				if (!this.mails) {
-					this.mails = this.$http.get('http://test-api.javascript.ru/v1/vmerkotan/letters?delay=1000').then(function (response) {
+					this.mails = this.$http.get('//test-api.javascript.ru/v1/vmerkotan/letters?delay=1000').then(function (response) {
 						return response.data;
 					});
 				}
@@ -37906,7 +37906,7 @@
 			key: 'getAllMailboxes',
 			value: function getAllMailboxes() {
 				if (!this.mailboxes) {
-					this.mailboxes = this.$http.get('http://test-api.javascript.ru/v1/vmerkotan/mailboxes?delay=1000').then(function (response) {
+					this.mailboxes = this.$http.get('//test-api.javascript.ru/v1/vmerkotan/mailboxes?delay=1000').then(function (response) {
 						return response.data;
 					});
 				}
@@ -37915,19 +37915,19 @@
 		}, {
 			key: 'deleteMail',
 			value: function deleteMail(letterId) {
-				return this.$http.delete('http://test-api.javascript.ru/v1/vmerkotan/letters/' + letterId + '?delay=1000');
+				return this.$http.delete('//test-api.javascript.ru/v1/vmerkotan/letters/' + letterId + '?delay=1000');
 			}
 		}, {
 			key: 'moveToTrash',
 			value: function moveToTrash(letterId, letter) {
 				this.mails = null;
-				return this.$http.patch('http://test-api.javascript.ru/v1/vmerkotan/letters/' + letterId + '?delay=1000', letter);
+				return this.$http.patch('//test-api.javascript.ru/v1/vmerkotan/letters/' + letterId + '?delay=1000', letter);
 			}
 		}, {
 			key: 'saveLetter',
 			value: function saveLetter(mail) {
 				this.mails = null;
-				return this.$http.post('http://test-api.javascript.ru/v1/vmerkotan/letters/?delay=1000', mail);
+				return this.$http.post('//test-api.javascript.ru/v1/vmerkotan/letters/?delay=1000', mail);
 			}
 		}]);
 	
@@ -38062,7 +38062,7 @@
 /* 47 */
 /***/ function(module, exports) {
 
-	module.exports = "<form name=\"$ctrl.addMailForm\" ng-submit=\"$ctrl.sendEmail()\">\n\t<div class=\"slds-form--stacked\">\n\t  <div class=\"slds-form-element\">\n\t\t<label class=\"slds-form-element__label\" for=\"mail\">\n\t\t<abbr class=\"slds-required\" title=\"required\">*</abbr> To</label>\n\t\t<div class=\"slds-form-element__control\">\n\t\t  <input ng-required=\"true\" id=\"mail\" class=\"slds-input\" type=\"email\" ng-model=\"$ctrl.to\"/>\n\t\t</div>\n\t  </div>\n\t  <div class=\"slds-form-element\">\n\t\t<label class=\"slds-form-element__label\" for=\"mail-subject\">\n\t\t<abbr class=\"slds-required\" title=\"required\">*</abbr> Subject</label>\n\t\t<div class=\"slds-form-element__control\">\n\t\t  <input ng-required=\"true\" id=\"mail-subject\" class=\"slds-input\" ng-model=\"$ctrl.subject\"/>\n\t\t</div>\n\t  </div>\n\t  <div class=\"slds-form-element\">\n\t  <label class=\"slds-form-element__label\" for=\"body\">Body</label>\n\t  <div class=\"slds-form-element__control\">\n\t\t<textarea id=\"body\" class=\"slds-textarea\"rows=\"10\" ng-model=\"$ctrl.body\"></textarea>\n\t  </div>\n\t</div>\n\t\t<button type=\"submit\" class=\"slds-button slds-button--brand slds-m-top--x-small slds-float--right\" ng-disabled=\"$ctrl.saving\">Send</button>\t\t  \n\t</div>\t\n</form>"
+	module.exports = "<form name=\"$ctrl.addMailForm\" ng-submit=\"$ctrl.sendEmail()\">\r\n\t<div class=\"slds-form--stacked\">\r\n\t  <div class=\"slds-form-element\">\r\n\t\t<label class=\"slds-form-element__label\" for=\"mail\">\r\n\t\t<abbr class=\"slds-required\" title=\"required\">*</abbr> To</label>\r\n\t\t<div class=\"slds-form-element__control\">\r\n\t\t  <input ng-required=\"true\" id=\"mail\" class=\"slds-input\" type=\"email\" ng-model=\"$ctrl.to\"/>\r\n\t\t</div>\r\n\t  </div>\r\n\t  <div class=\"slds-form-element\">\r\n\t\t<label class=\"slds-form-element__label\" for=\"mail-subject\">\r\n\t\t<abbr class=\"slds-required\" title=\"required\">*</abbr> Subject</label>\r\n\t\t<div class=\"slds-form-element__control\">\r\n\t\t  <input ng-required=\"true\" id=\"mail-subject\" class=\"slds-input\" ng-model=\"$ctrl.subject\"/>\r\n\t\t</div>\r\n\t  </div>\r\n\t  <div class=\"slds-form-element\">\r\n\t  <label class=\"slds-form-element__label\" for=\"body\">Body</label>\r\n\t  <div class=\"slds-form-element__control\">\r\n\t\t<textarea id=\"body\" class=\"slds-textarea\"rows=\"10\" ng-model=\"$ctrl.body\"></textarea>\r\n\t  </div>\r\n\t</div>\r\n\t\t<button type=\"submit\" class=\"slds-button slds-button--brand slds-m-top--x-small slds-float--right\" ng-disabled=\"$ctrl.saving\">Send</button>\t\t  \r\n\t</div>\t\r\n</form>"
 
 /***/ },
 /* 48 */
@@ -38324,7 +38324,7 @@
 /* 58 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"slds-p-left--xx-large\">\t\n\t<div ng-repeat=\"letter in $ctrl.letters\">\n\t\t<div ui-sref=\"letter({letterId:letter._id })\" class=\"slds-p-around--xx-small emailCard\">{{letter.subject}}</div>\t\t\t\t\t\n\t</div>\n\t<ui-view></ui-view>\n</div>"
+	module.exports = "<div class=\"slds-p-left--xx-large\">\t\r\n\t<div ng-repeat=\"letter in $ctrl.letters\">\r\n\t\t<div ui-sref=\"letter({letterId:letter._id })\" class=\"slds-p-around--xx-small emailCard\">{{letter.subject}}</div>\t\t\t\t\t\r\n\t</div>\r\n\t<ui-view></ui-view>\r\n</div>"
 
 /***/ },
 /* 59 */
@@ -38519,7 +38519,7 @@
 /* 64 */
 /***/ function(module, exports) {
 
-	module.exports = "<div role=\"dialog\" tabindex=\"-1\" aria-labelledby=\"modal_header\" class=\"slds-modal slds-fade-in-open\">\n  <div class=\"slds-modal__container\">\n    <div class=\"slds-modal__header\">\t\n\t <button class=\"slds-button slds-modal__close slds-button--icon-inverse\"  ng-click=\"$ctrl.goBack()\">\n        <svg aria-hidden=\"true\" class=\"slds-button__icon slds-button__icon--large\">\n          <use xlink:href=\"./assets/icons/utility-sprite/svg/symbols.svg#close\"></use>\n        </svg>\n        <span class=\"slds-assistive-text\">Close</span>\n      </button>\n      <h2 id=\"modal_header\" class=\"slds-text-heading--medium\">{{$ctrl.letter.subject}}</h2>\n    </div>\n    <div class=\"slds-modal__content slds-p-around--medium\">\n      <div>\n\t\t<p><b>To:</b> {{$ctrl.letter.to}}</p><br/>\n        <p>{{$ctrl.letter.body}}</p>\t\t\n      </div>\n    </div>\n    <div class=\"slds-modal__footer\">   \n\t\t<span class=\"slds-m-right--small\" ng-if=\"$ctrl.deleting\">Deleting...</span>\n      <button class=\"slds-button slds-button--brand\" ng-click=\"$ctrl.deleteMail($ctrl.letter._id)\" ng-disabled=\"$ctrl.deleting\">Delete</button>\n    </div>\n  </div>\n</div>\n<div class=\"slds-backdrop slds-backdrop--open\"></div>"
+	module.exports = "<div role=\"dialog\" tabindex=\"-1\" aria-labelledby=\"modal_header\" class=\"slds-modal slds-fade-in-open\">\r\n  <div class=\"slds-modal__container\">\r\n    <div class=\"slds-modal__header\">\t\r\n\t <button class=\"slds-button slds-modal__close slds-button--icon-inverse\"  ng-click=\"$ctrl.goBack()\">\r\n        <svg aria-hidden=\"true\" class=\"slds-button__icon slds-button__icon--large\">\r\n          <use xlink:href=\"./assets/icons/utility-sprite/svg/symbols.svg#close\"></use>\r\n        </svg>\r\n        <span class=\"slds-assistive-text\">Close</span>\r\n      </button>\r\n      <h2 id=\"modal_header\" class=\"slds-text-heading--medium\">{{$ctrl.letter.subject}}</h2>\r\n    </div>\r\n    <div class=\"slds-modal__content slds-p-around--medium\">\r\n      <div>\r\n\t\t<p><b>To:</b> {{$ctrl.letter.to}}</p><br/>\r\n        <p>{{$ctrl.letter.body}}</p>\t\t\r\n      </div>\r\n    </div>\r\n    <div class=\"slds-modal__footer\">   \r\n\t\t<span class=\"slds-m-right--small\" ng-if=\"$ctrl.deleting\">Deleting...</span>\r\n      <button class=\"slds-button slds-button--brand\" ng-click=\"$ctrl.deleteMail($ctrl.letter._id)\" ng-disabled=\"$ctrl.deleting\">Delete</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"slds-backdrop slds-backdrop--open\"></div>"
 
 /***/ },
 /* 65 */
@@ -38613,7 +38613,7 @@
 /* 69 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"slds-spinner_container\">\n  <div class=\"slds-spinner slds-spinner--medium\" role=\"alert\">\n\t<span class=\"slds-assistive-text\">Loading</span>\n\t<div class=\"slds-spinner__dot-a\"></div>\n\t<div class=\"slds-spinner__dot-b\"></div>\n  </div>\n</div>"
+	module.exports = "<div class=\"slds-spinner_container\">\r\n  <div class=\"slds-spinner slds-spinner--medium\" role=\"alert\">\r\n\t<span class=\"slds-assistive-text\">Loading</span>\r\n\t<div class=\"slds-spinner__dot-a\"></div>\r\n\t<div class=\"slds-spinner__dot-b\"></div>\r\n  </div>\r\n</div>"
 
 /***/ },
 /* 70 */
@@ -38711,7 +38711,7 @@
 /* 74 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"slds-notify_container\">\n  <div class=\"slds-notify slds-notify--toast\" role=\"alert\">\n    <span class=\"slds-assistive-text\">Info</span>\n    <button class=\"slds-button slds-notify__close slds-button--icon-inverse\" ng-click=\"$ctrl.hideNotification()\">\n      <svg aria-hidden=\"true\" class=\"slds-button__icon slds-button__icon--large\">\n        <use xlink:href=\"./assets/icons/utility-sprite/svg/symbols.svg#close\"></use>\n      </svg>\n      <span class=\"slds-assistive-text\">Close</span>\n    </button>\n    <div class=\"slds-notify__content\">\n      <h2 class=\"slds-text-heading--small\">{{$ctrl.notificationMessage}}</h2>\n    </div>\n  </div>\n</div>"
+	module.exports = "<div class=\"slds-notify_container\">\r\n  <div class=\"slds-notify slds-notify--toast\" role=\"alert\">\r\n    <span class=\"slds-assistive-text\">Info</span>\r\n    <button class=\"slds-button slds-notify__close slds-button--icon-inverse\" ng-click=\"$ctrl.hideNotification()\">\r\n      <svg aria-hidden=\"true\" class=\"slds-button__icon slds-button__icon--large\">\r\n        <use xlink:href=\"./assets/icons/utility-sprite/svg/symbols.svg#close\"></use>\r\n      </svg>\r\n      <span class=\"slds-assistive-text\">Close</span>\r\n    </button>\r\n    <div class=\"slds-notify__content\">\r\n      <h2 class=\"slds-text-heading--small\">{{$ctrl.notificationMessage}}</h2>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ },
 /* 75 */
@@ -38846,7 +38846,7 @@
 /* 80 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"slds-m-top--large slds-align--absolute-center login-error slds-p-around--xx-small\" ng-if=\"$ctrl.authError\">{{$ctrl.authError}}</div>\n\t\t\t\t\t<ui-view></ui-view>"
+	module.exports = "<div class=\"slds-m-top--large slds-align--absolute-center login-error slds-p-around--xx-small\" ng-if=\"$ctrl.authError\">{{$ctrl.authError}}</div>\r\n\t\t\t\t\t<ui-view></ui-view>"
 
 /***/ },
 /* 81 */
