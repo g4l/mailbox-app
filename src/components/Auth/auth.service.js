@@ -18,10 +18,11 @@ class AuthSvc {
 	   } else if( !this.email.trim() && !this.password ) {
 		   deferred.reject("Login required...");
 	   } else {
-			this.$timeout(function(){
+			this.$timeout(()=>{
 			   if( (this.email.trim() === "me@test.com" && this.password === "qwerty")  ) {
 				this.remember ? this.LocalStorageSrv.setItem(this.storageKey, true) : this.SessionStorageSrv.setItem(this.storageKey, true);
 				  deferred.resolve("Authenticated");
+				  
 			   } else {				
 				  deferred.reject("Incorrect login and/or password...");
 			   }			   

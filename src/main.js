@@ -6,4 +6,4 @@ import ContactsModule from './components/Contacts/contacts.module.js';
 import MailBoxModule from './components/MailBox/mailbox.module.js';
 import WrapperModule from './components/Wrapper/wrapper.module.js';
 
-angular.module('mailbox-app', [uiRouter, CommonModule, AuthModule, ContactsModule, MailBoxModule, WrapperModule])
+angular.module('mailbox-app', [uiRouter, CommonModule, AuthModule, ContactsModule, MailBoxModule, WrapperModule]);

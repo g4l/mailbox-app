@@ -1,13 +1,14 @@
 class LettersController {
-	constructor($scope, MailsDataSvc) {
+	constructor($scope, $log, MailsDataSvc) {
 		this.$scope = $scope;
-		this.MailsDataSvc = MailsDataSvc;
-		getAllMails();
-		
-	  this.$scope.$on('deleteLetter', function(name, letterId){
-		//почему через this.letters не работает? 
-		this.$scope.$ctrl.letters = this.$scope.$ctrl.letters.filter( i => i._id != letterId);
-	  });
+		this.$log = $log;
+		this.MailsDataSvc = MailsDataSvc;		
+		this.letters = [];
+	    this.$scope.$on('deleteLetter', (name, letterId) =>{
+			//this.$scope.$ctrl.letters = this.$scope.$ctrl.letters.filter( i => i._id != letterId);
+			this.letters = this.letters.filter( i => i._id != letterId);
+	    });
+		this.getAllMails();
 	}
 	
 	getAllMails() {
@@ -17,9 +18,11 @@ class LettersController {
 		this.$scope.$emit('stopLoading');
       })
 	  .catch(error => {
-			console.log("letters component error >>>>>", error);
+			this.$log.error("letters component error >>>>>", error);
 			this.$scope.$emit('stopLoading');
 			this.$scope.$emit('showError', error.status + ' ' + error.statusText);			
 		})
 	}
 }
+LettersController.$inject = ['$scope', '$log', 'MailsDataSvc']
+export default LettersController;

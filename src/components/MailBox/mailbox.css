@@ -1,0 +1,7 @@
+.ng-pristine .ng-invalid-required {
+    box-shadow: none;
+}
+
+.slds-spinner_container {
+	z-index: 2;
+}

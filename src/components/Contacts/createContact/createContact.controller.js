@@ -1,6 +1,5 @@
 class CreateContact{
-	constructor(ContactsDataSvc) {
-		this.ContactsDataSvc = ContactsDataSvc;
+	constructor() {
 		this.fullName = "";
 		this.email = "";
 		this.birthdate = "";
@@ -33,5 +32,4 @@ class CreateContact{
 	
 }
 
-CreateContact.$inject = ['ContactsDataSvc'];
 export default CreateContact;

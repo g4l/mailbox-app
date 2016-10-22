@@ -1,13 +1,14 @@
 class LetterController {
-	constructor($state, $scope, MailsDataSvc) {
+	constructor($state, $scope, $log, MailsDataSvc) {
 		this.$state = $state;
 		this.$scope = $scope;
+		this.$log = $log;
 		this.MailsDataSvc = MailsDataSvc;
 		this.deleting = false;
 		this.letter = {};
 		this.trashMailbox = {};
 		this.sentMailbox = {};
-		getData();
+		this.getData();
 	}
 	
 	getData() {
@@ -21,6 +22,10 @@ class LetterController {
 		})
 	}
 	
+	goBack() {
+		this.$state.go('^');
+	}
+	
 	deleteMail(letterId) {
 		this.deleting = true;
 		if(this.letter.mailbox == this.trashMailbox._id) {
@@ -31,7 +36,7 @@ class LetterController {
 				this.$scope.$emit('showNotification', "Letter was deleted successfully.");
 			})
 			.catch(error => {
-				console.log("letter component error in deleteMail >>>>>", error);
+				this.$log.error("letter component error in deleteMail >>>>>", error);
 				this.$state.go('^');
 				this.deleting = false;
 				this.$scope.$emit('showError', error.status + ' ' + error.statusText);
@@ -44,7 +49,7 @@ class LetterController {
 				this.$scope.$emit('showNotification', "Letter was moved to trash mailbox successfully.");
 			})
 			.catch(error => {
-				console.log("letter component error in moveToTrash >>>>>", error);
+				this.$log.error("letter component error in moveToTrash >>>>>", error);
 				this.$state.go('^');
 				this.deleting = false;
 				this.$scope.$emit('showError', error.status + ' ' + error.statusText);
@@ -52,5 +57,5 @@ class LetterController {
 		}		
 	}	
 }
-LetterController.$inject = ['$state', '$scope', 'MailsDataSvc']
+LetterController.$inject = ['$state', '$scope', '$log', 'MailsDataSvc']
 export default LetterController;

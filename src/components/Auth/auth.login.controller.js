@@ -1,7 +1,6 @@
 class AuthLoginController {
-	constructor($scope, $log, $state, AuthSvc) {
+	constructor($scope, $state, AuthSvc) {
 		this.$scope = $scope;
-		this.$log = $log;
 		this.$state = $state;
 		this.AuthSvc = AuthSvc;
 		this.password = "";
@@ -22,5 +21,5 @@ class AuthLoginController {
 		this.$state.go('mailboxes');
 	}
 }
-AuthLoginController.$inject = ['$scope', '$log', '$state', 'AuthSvc'];
+AuthLoginController.$inject = ['$scope', '$state', 'AuthSvc'];
 export default AuthLoginController;

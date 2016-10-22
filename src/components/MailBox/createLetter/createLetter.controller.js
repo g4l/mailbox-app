@@ -6,7 +6,7 @@ class CreateLetter {
 		this.subject = "";
 		this.body = "";
 		this.sentMailbox = "";
-		getMailBoxes();
+		this.getMailBoxes();
 	}
 	
 	getMailBoxes() {

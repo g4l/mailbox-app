@@ -1,5 +1,4 @@
 var webpack = require('webpack');
-//var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin') 
  
 var config = {
@@ -7,7 +6,7 @@ var config = {
   entry: ['./src/main.js'],
 	
   output: {
-    path: 'build/',
+    path: 'docs/',
     filename: 'bundle.js'
   },
   
@@ -18,7 +17,8 @@ var config = {
     loaders: [
       { test: /\.js/, exclude: /node_modules/, loaders: ['babel'] },
 	  { test: /\.html$/, loader: 'raw' },
-	  { test: /\.css$/, loader: 'style!css' }
+	  { test: /\.css$/, loader: 'style!css' },
+	  { test: /(eot|ttf|woff|woff2)$/, loader: 'file?name=fonts/webfonts/[name].[ext]' }
     ]
   },
   
