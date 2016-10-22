@@ -1,0 +1,6 @@
+.slds-card.slds-card--narrow, create-contact form {
+	min-width: 480px;
+    max-width: 520px;
+	margin-left: auto;
+	margin-right: auto;
+}

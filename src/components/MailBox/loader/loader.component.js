@@ -1,0 +1,1 @@
+import template from './loader.html';import './loader.css';let LoaderComponent = {	template}export default LoaderComponent;

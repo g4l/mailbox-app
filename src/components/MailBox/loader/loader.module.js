@@ -1,0 +1,1 @@
+import angular from 'angular';import LoaderComponent from './loader.component.js';let LoaderModule = angular.module('loader-module', [])	.component('mbLoader', LoaderComponent)	.name;	export default LoaderModule;

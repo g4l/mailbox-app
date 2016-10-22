@@ -1,0 +1,13 @@
+.mb-error-message, .login-error {
+	color: white;
+	background-color: rgba(255,57,52,0.5);
+}
+
+.login-error {
+	width:350px;
+}
+
+.mb-error-message svg{
+	fill: currentColor;
+	cursor: pointer;
+}

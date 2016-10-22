@@ -1,0 +1,1 @@
+import template from './contacts.html';import controller from './contacts.controller.js';import './contacts.css';let ContactsComponent = {	template, controller}export default ContactsComponent;

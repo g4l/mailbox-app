@@ -1,1 +1,0 @@
-angular.module('mailbox').component("mbError", {	bindings: {		errorMessage: '<',		hideError: '&'	},    templateUrl: 'src/MailBox/templates/mailbox.error.component.tmpl.html'  })
