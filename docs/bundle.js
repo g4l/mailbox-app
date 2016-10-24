@@ -77,7 +77,7 @@
 	
 	var _mailboxModule2 = _interopRequireDefault(_mailboxModule);
 	
-	var _wrapperModule = __webpack_require__(77);
+	var _wrapperModule = __webpack_require__(62);
 	
 	var _wrapperModule2 = _interopRequireDefault(_wrapperModule);
 	
@@ -37702,25 +37702,13 @@
 	
 	var _createLetterModule2 = _interopRequireDefault(_createLetterModule);
 	
-	var _errorModule = __webpack_require__(50);
-	
-	var _errorModule2 = _interopRequireDefault(_errorModule);
-	
-	var _lettersModule = __webpack_require__(55);
+	var _lettersModule = __webpack_require__(50);
 	
 	var _lettersModule2 = _interopRequireDefault(_lettersModule);
 	
-	var _loaderModule = __webpack_require__(67);
-	
-	var _loaderModule2 = _interopRequireDefault(_loaderModule);
-	
-	var _notificationModule = __webpack_require__(72);
-	
-	var _notificationModule2 = _interopRequireDefault(_notificationModule);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var MailboxModule = _angular2.default.module('mailbox-module', [_createLetterModule2.default, _errorModule2.default, _lettersModule2.default, _loaderModule2.default, _notificationModule2.default]).component('mailboxes', _mailboxComponent2.default).service('MailsDataSvc', _mailboxService2.default).name;
+	var MailboxModule = _angular2.default.module('mailbox-module', [_createLetterModule2.default, _lettersModule2.default]).component('mailboxes', _mailboxComponent2.default).service('MailsDataSvc', _mailboxService2.default).name;
 	
 	exports.default = MailboxModule;
 
@@ -37769,53 +37757,28 @@
 	
 	var MailBoxController = function () {
 	  function MailBoxController($scope, $log, MailsDataSvc) {
-	    var _this = this;
-	
 	    _classCallCheck(this, MailBoxController);
 	
 	    this.$scope = $scope;
 	    this.$log = $log;
 	    this.MailsDataSvc = MailsDataSvc;
-	    this.loading = true;
-	
-	    this.$scope.$on('startLoading', function () {
-	      _this.$scope.$ctrl.loading = true;
-	    });
-	    this.$scope.$on('stopLoading', function () {
-	      _this.$scope.$ctrl.loading = false;
-	    });
-	    this.$scope.$on('showError', function (name, errorMessage) {
-	      _this.$scope.$ctrl.error = errorMessage;
-	    });
-	    this.$scope.$on('showNotification', function (name, message) {
-	      _this.$scope.$ctrl.notification = message;
-	    });
 	    this.getAllMailBoxes();
 	  }
 	
 	  _createClass(MailBoxController, [{
 	    key: 'getAllMailBoxes',
 	    value: function getAllMailBoxes() {
-	      var _this2 = this;
+	      var _this = this;
 	
+	      this.$scope.$emit('startLoading');
 	      this.MailsDataSvc.getAllMailboxes().then(function (mailboxes) {
-	        _this2.mailboxes = mailboxes;
-	        _this2.loading = false;
+	        _this.mailboxes = mailboxes;
+	        _this.$scope.$emit('stopLoading');
 	      }).catch(function (error) {
-	        _this2.$log.error("mailboxes component error >>>>>", error);
-	        _this2.loading = false;
-	        _this2.error = error.status + ' ' + error.statusText;
+	        _this.$log.error("mailboxes component error >>>>>", error);
+	        _this.$scope.$emit('stopLoading');
+	        _this.$scope.$emit('showError', error.status + ' ' + error.statusText);
 	      });
-	    }
-	  }, {
-	    key: 'hideError',
-	    value: function hideError() {
-	      this.error = '';
-	    }
-	  }, {
-	    key: 'hideNotification',
-	    value: function hideNotification() {
-	      this.notification = '';
 	    }
 	  }]);
 	
@@ -37829,7 +37792,7 @@
 /* 40 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"slds-context-bar\">\r  <div class=\"slds-context-bar__primary slds-context-bar__item--divider-right\">\r\t<div class=\"slds-context-bar__item slds-context-bar__dropdown-trigger slds-dropdown-trigger slds-dropdown-trigger--click slds-no-hover\">\r\t  <div class=\"slds-context-bar__icon-action\">\r\t\t<a href=\"javascript:void(0);\" class=\"slds-icon-waffle_container slds-context-bar__button\">\r\t\t  <div class=\"slds-icon-waffle\">\r\t\t\t<div class=\"slds-r1\"></div>\r\t\t\t<div class=\"slds-r2\"></div>\r\t\t\t<div class=\"slds-r3\"></div>\r\t\t\t<div class=\"slds-r4\"></div>\r\t\t\t<div class=\"slds-r5\"></div>\r\t\t\t<div class=\"slds-r6\"></div>\r\t\t\t<div class=\"slds-r7\"></div>\r\t\t\t<div class=\"slds-r8\"></div>\r\t\t\t<div class=\"slds-r9\"></div>\r\t\t  </div>          \r\t\t</a>\r\t  </div>\r\t  <span class=\"slds-context-bar__label-action slds-context-bar__app-name\">\r\t\t<span class=\"slds-truncate\">MailBox</span>\r\t  </span>\r\t</div>\r  </div>\r  <nav class=\"slds-context-bar__secondary\" role=\"navigation\">\r\t<ul class=\"slds-grid\">\r\t   <li class=\"slds-context-bar__item\" ng-repeat=\"mailbox in $ctrl.mailboxes\" ui-sref=\"mailbox({mailboxId: mailbox._id })\" ui-sref-active=\"slds-is-active\">\r\t\t<a class=\"slds-context-bar__label-action\" title={{mailbox.title}}>\r\t\t  <span class=\"slds-truncate\">{{mailbox.title}}</span>\r\t\t</a>\r\t  </li>\r\t  <li class=\"slds-context-bar__item\" ui-sref=\"create\" ui-sref-active=\"slds-is-active\">\r\t\t<a class=\"slds-context-bar__label-action\" title=\"create\">\r\t\t  <span class=\"slds-truncate\">create</span>\r\t\t</a>\r\t  </li>\r\t  <li class=\"slds-context-bar__item\" ui-sref=\"contacts\" ui-sref-active=\"slds-is-active\">\r\t\t<a class=\"slds-context-bar__label-action\" title=\"contacts\">\r\t\t  <span class=\"slds-truncate\">contacts</span>\r\t\t</a>\r\t  </li>\r\t</ul>\r  </nav>\r</div>\r<mb-loader ng-if=\"$ctrl.loading\"></mb-loader>\r<mb-error ng-if=\"$ctrl.error\" error-message=\"$ctrl.error\" hide-error=\"$ctrl.hideError()\"></mb-error>\r<mb-notification ng-if=\"$ctrl.notification\" notification-message=\"$ctrl.notification\" hide-notification=\"$ctrl.hideNotification()\"></mb-notification>\r<ui-view></ui-view>"
+	module.exports = "<div class=\"slds-context-bar\">\r  <div class=\"slds-context-bar__primary slds-context-bar__item--divider-right\">\r\t<div class=\"slds-context-bar__item slds-context-bar__dropdown-trigger slds-dropdown-trigger slds-dropdown-trigger--click slds-no-hover\">\r\t  <div class=\"slds-context-bar__icon-action\">\r\t\t<a href=\"javascript:void(0);\" class=\"slds-icon-waffle_container slds-context-bar__button\">\r\t\t  <div class=\"slds-icon-waffle\">\r\t\t\t<div class=\"slds-r1\"></div>\r\t\t\t<div class=\"slds-r2\"></div>\r\t\t\t<div class=\"slds-r3\"></div>\r\t\t\t<div class=\"slds-r4\"></div>\r\t\t\t<div class=\"slds-r5\"></div>\r\t\t\t<div class=\"slds-r6\"></div>\r\t\t\t<div class=\"slds-r7\"></div>\r\t\t\t<div class=\"slds-r8\"></div>\r\t\t\t<div class=\"slds-r9\"></div>\r\t\t  </div>          \r\t\t</a>\r\t  </div>\r\t  <span class=\"slds-context-bar__label-action slds-context-bar__app-name\">\r\t\t<span class=\"slds-truncate\">MailBox</span>\r\t  </span>\r\t</div>\r  </div>\r  <nav class=\"slds-context-bar__secondary\" role=\"navigation\">\r\t<ul class=\"slds-grid\">\r\t   <li class=\"slds-context-bar__item\" ng-repeat=\"mailbox in $ctrl.mailboxes\" ui-sref=\"mailbox({mailboxId: mailbox._id })\" ui-sref-active=\"slds-is-active\">\r\t\t<a class=\"slds-context-bar__label-action\" title={{mailbox.title}}>\r\t\t  <span class=\"slds-truncate\">{{mailbox.title}}</span>\r\t\t</a>\r\t  </li>\r\t  <li class=\"slds-context-bar__item\" ui-sref=\"create\" ui-sref-active=\"slds-is-active\">\r\t\t<a class=\"slds-context-bar__label-action\" title=\"create\">\r\t\t  <span class=\"slds-truncate\">create</span>\r\t\t</a>\r\t  </li>\r\t  <li class=\"slds-context-bar__item\" ui-sref=\"contacts\" ui-sref-active=\"slds-is-active\">\r\t\t<a class=\"slds-context-bar__label-action\" title=\"contacts\">\r\t\t  <span class=\"slds-truncate\">contacts</span>\r\t\t</a>\r\t  </li>\r\t</ul>\r  </nav>\r</div>\r<ui-view></ui-view>"
 
 /***/ },
 /* 41 */
@@ -38111,22 +38074,26 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 	
 	var _angular = __webpack_require__(2);
 	
 	var _angular2 = _interopRequireDefault(_angular);
 	
-	var _errorComponent = __webpack_require__(51);
+	var _lettersComponent = __webpack_require__(51);
 	
-	var _errorComponent2 = _interopRequireDefault(_errorComponent);
+	var _lettersComponent2 = _interopRequireDefault(_lettersComponent);
+	
+	var _letterModule = __webpack_require__(56);
+	
+	var _letterModule2 = _interopRequireDefault(_letterModule);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var ErrorModule = _angular2.default.module('error-module', []).component("mbError", _errorComponent2.default).name;
+	var LettersModule = _angular2.default.module('letters-module', [_letterModule2.default]).component('letters', _lettersComponent2.default).name;
 	
-	exports.default = ErrorModule;
+	exports.default = LettersModule;
 
 /***/ },
 /* 51 */
@@ -38138,117 +38105,15 @@
 	  value: true
 	});
 	
-	var _error = __webpack_require__(52);
-	
-	var _error2 = _interopRequireDefault(_error);
-	
-	__webpack_require__(53);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var ErrorComponent = {
-	  bindings: {
-	    errorMessage: '<',
-	    hideError: '&'
-	  },
-	  template: _error2.default
-	};
-	
-	exports.default = ErrorComponent;
-
-/***/ },
-/* 52 */
-/***/ function(module, exports) {
-
-	module.exports = "<div role=\"alertdialog\" tabindex=\"-1\" aria-labelledby=\"prompt-heading-id\" aria-describedby=\"prompt-message-wrapper\" class=\"slds-modal slds-fade-in-open slds-modal--prompt\">\r  <div class=\"slds-modal__container\">\r    <div class=\"slds-modal__header slds-theme--error slds-theme--alert-texture\">\r      <button class=\"slds-button slds-modal__close slds-button--icon-inverse\"  ng-click=\"$ctrl.hideError()\">\r        <svg aria-hidden=\"true\" class=\"slds-button__icon slds-button__icon--large\">\r          <use xlink:href=\"./assets/icons/utility-sprite/svg/symbols.svg#close\"></use>\r        </svg>\r        <span class=\"slds-assistive-text\">Close</span>\r      </button>\r      <h2 class=\"slds-text-heading--medium\" id=\"prompt-heading-id\">Oops... Something happened.</h2>\r    </div>\r    <div class=\"slds-modal__content slds-p-around--medium\">\r      <div>\r        <p>{{$ctrl.errorMessage}}</p>\r      </div>\r    </div>\r    <div class=\"slds-modal__footer slds-theme--default\">\r      <button class=\"slds-button slds-button--neutral\"  ng-click=\"$ctrl.hideError()\">Okay</button>\r    </div>\r  </div>\r</div>\r<div class=\"slds-backdrop slds-backdrop--open\"></div>"
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(54);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(16)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./error.css", function() {
-				var newContent = require("!!./../../../../node_modules/css-loader/index.js!./error.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 54 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(15)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, ".mb-error-message, .login-error {\r\n\tcolor: white;\r\n\tbackground-color: rgba(255,57,52,0.5);\r\n}\r\n\r\n.login-error {\r\n\twidth:350px;\r\n}\r\n\r\n.mb-error-message svg{\r\n\tfill: currentColor;\r\n\tcursor: pointer;\r\n}", ""]);
-	
-	// exports
-
-
-/***/ },
-/* 55 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _angular = __webpack_require__(2);
-	
-	var _angular2 = _interopRequireDefault(_angular);
-	
-	var _lettersComponent = __webpack_require__(56);
-	
-	var _lettersComponent2 = _interopRequireDefault(_lettersComponent);
-	
-	var _letterModule = __webpack_require__(61);
-	
-	var _letterModule2 = _interopRequireDefault(_letterModule);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var LettersModule = _angular2.default.module('letters-module', [_letterModule2.default]).component('letters', _lettersComponent2.default).name;
-	
-	exports.default = LettersModule;
-
-/***/ },
-/* 56 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _lettersController = __webpack_require__(57);
+	var _lettersController = __webpack_require__(52);
 	
 	var _lettersController2 = _interopRequireDefault(_lettersController);
 	
-	var _letters = __webpack_require__(58);
+	var _letters = __webpack_require__(53);
 	
 	var _letters2 = _interopRequireDefault(_letters);
 	
-	__webpack_require__(59);
+	__webpack_require__(54);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -38263,7 +38128,7 @@
 	exports.default = LettersComponent;
 
 /***/ },
-/* 57 */
+/* 52 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38321,19 +38186,19 @@
 	exports.default = LettersController;
 
 /***/ },
-/* 58 */
+/* 53 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"slds-p-left--xx-large\">\t\r\n\t<div ng-repeat=\"letter in $ctrl.letters\">\r\n\t\t<div ui-sref=\"letter({letterId:letter._id })\" class=\"slds-p-around--xx-small emailCard\">{{letter.subject}}</div>\t\t\t\t\t\r\n\t</div>\r\n\t<ui-view></ui-view>\r\n</div>"
 
 /***/ },
-/* 59 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(60);
+	var content = __webpack_require__(55);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(16)(content, {});
@@ -38353,7 +38218,7 @@
 	}
 
 /***/ },
-/* 60 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(15)();
@@ -38367,7 +38232,7 @@
 
 
 /***/ },
-/* 61 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38380,7 +38245,7 @@
 	
 	var _angular2 = _interopRequireDefault(_angular);
 	
-	var _letterComponent = __webpack_require__(62);
+	var _letterComponent = __webpack_require__(57);
 	
 	var _letterComponent2 = _interopRequireDefault(_letterComponent);
 	
@@ -38391,7 +38256,7 @@
 	exports.default = LetterModule;
 
 /***/ },
-/* 62 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38400,15 +38265,15 @@
 		value: true
 	});
 	
-	var _letterController = __webpack_require__(63);
+	var _letterController = __webpack_require__(58);
 	
 	var _letterController2 = _interopRequireDefault(_letterController);
 	
-	var _letter = __webpack_require__(64);
+	var _letter = __webpack_require__(59);
 	
 	var _letter2 = _interopRequireDefault(_letter);
 	
-	__webpack_require__(65);
+	__webpack_require__(60);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -38423,7 +38288,7 @@
 	exports.default = LetterComponent;
 
 /***/ },
-/* 63 */
+/* 58 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38516,19 +38381,19 @@
 	exports.default = LetterController;
 
 /***/ },
-/* 64 */
+/* 59 */
 /***/ function(module, exports) {
 
 	module.exports = "<div role=\"dialog\" tabindex=\"-1\" aria-labelledby=\"modal_header\" class=\"slds-modal slds-fade-in-open\">\r\n  <div class=\"slds-modal__container\">\r\n    <div class=\"slds-modal__header\">\t\r\n\t <button class=\"slds-button slds-modal__close slds-button--icon-inverse\"  ng-click=\"$ctrl.goBack()\">\r\n        <svg aria-hidden=\"true\" class=\"slds-button__icon slds-button__icon--large\">\r\n          <use xlink:href=\"./assets/icons/utility-sprite/svg/symbols.svg#close\"></use>\r\n        </svg>\r\n        <span class=\"slds-assistive-text\">Close</span>\r\n      </button>\r\n      <h2 id=\"modal_header\" class=\"slds-text-heading--medium\">{{$ctrl.letter.subject}}</h2>\r\n    </div>\r\n    <div class=\"slds-modal__content slds-p-around--medium\">\r\n      <div>\r\n\t\t<p><b>To:</b> {{$ctrl.letter.to}}</p><br/>\r\n        <p>{{$ctrl.letter.body}}</p>\t\t\r\n      </div>\r\n    </div>\r\n    <div class=\"slds-modal__footer\">   \r\n\t\t<span class=\"slds-m-right--small\" ng-if=\"$ctrl.deleting\">Deleting...</span>\r\n      <button class=\"slds-button slds-button--brand\" ng-click=\"$ctrl.deleteMail($ctrl.letter._id)\" ng-disabled=\"$ctrl.deleting\">Delete</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"slds-backdrop slds-backdrop--open\"></div>"
 
 /***/ },
-/* 65 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(66);
+	var content = __webpack_require__(61);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(16)(content, {});
@@ -38548,7 +38413,7 @@
 	}
 
 /***/ },
-/* 66 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(15)();
@@ -38562,7 +38427,43 @@
 
 
 /***/ },
-/* 67 */
+/* 62 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _angular = __webpack_require__(2);
+	
+	var _angular2 = _interopRequireDefault(_angular);
+	
+	var _errorModule = __webpack_require__(63);
+	
+	var _errorModule2 = _interopRequireDefault(_errorModule);
+	
+	var _loaderModule = __webpack_require__(68);
+	
+	var _loaderModule2 = _interopRequireDefault(_loaderModule);
+	
+	var _notificationModule = __webpack_require__(73);
+	
+	var _notificationModule2 = _interopRequireDefault(_notificationModule);
+	
+	var _wrapperComponent = __webpack_require__(78);
+	
+	var _wrapperComponent2 = _interopRequireDefault(_wrapperComponent);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var WrapperModule = _angular2.default.module('wrapper-module', [_errorModule2.default, _loaderModule2.default, _notificationModule2.default]).component('wrapper', _wrapperComponent2.default).name;
+	
+	exports.default = WrapperModule;
+
+/***/ },
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38575,15 +38476,89 @@
 	
 	var _angular2 = _interopRequireDefault(_angular);
 	
-	var _loaderComponent = __webpack_require__(68);
+	var _errorComponent = __webpack_require__(64);
 	
-	var _loaderComponent2 = _interopRequireDefault(_loaderComponent);
+	var _errorComponent2 = _interopRequireDefault(_errorComponent);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var LoaderModule = _angular2.default.module('loader-module', []).component('mbLoader', _loaderComponent2.default).name;
+	var ErrorModule = _angular2.default.module('error-module', []).component("mbError", _errorComponent2.default).name;
 	
-	exports.default = LoaderModule;
+	exports.default = ErrorModule;
+
+/***/ },
+/* 64 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _error = __webpack_require__(65);
+	
+	var _error2 = _interopRequireDefault(_error);
+	
+	__webpack_require__(66);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ErrorComponent = {
+	  bindings: {
+	    errorMessage: '<',
+	    hideError: '&'
+	  },
+	  template: _error2.default
+	};
+	
+	exports.default = ErrorComponent;
+
+/***/ },
+/* 65 */
+/***/ function(module, exports) {
+
+	module.exports = "<div role=\"alertdialog\" tabindex=\"-1\" aria-labelledby=\"prompt-heading-id\" aria-describedby=\"prompt-message-wrapper\" class=\"slds-modal slds-fade-in-open slds-modal--prompt\">\r  <div class=\"slds-modal__container\">\r    <div class=\"slds-modal__header slds-theme--error slds-theme--alert-texture\">\r      <button class=\"slds-button slds-modal__close slds-button--icon-inverse\"  ng-click=\"$ctrl.hideError()\">\r        <svg aria-hidden=\"true\" class=\"slds-button__icon slds-button__icon--large\">\r          <use xlink:href=\"./assets/icons/utility-sprite/svg/symbols.svg#close\"></use>\r        </svg>\r        <span class=\"slds-assistive-text\">Close</span>\r      </button>\r      <h2 class=\"slds-text-heading--medium\" id=\"prompt-heading-id\">Oops... Something happened.</h2>\r    </div>\r    <div class=\"slds-modal__content slds-p-around--medium\">\r      <div>\r        <p>{{$ctrl.errorMessage}}</p>\r      </div>\r    </div>\r    <div class=\"slds-modal__footer slds-theme--default\">\r      <button class=\"slds-button slds-button--neutral\"  ng-click=\"$ctrl.hideError()\">Okay</button>\r    </div>\r  </div>\r</div>\r<div class=\"slds-backdrop slds-backdrop--open\"></div>"
+
+/***/ },
+/* 66 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(67);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(16)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./error.css", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js!./error.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 67 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(15)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".mb-error-message, .login-error {\r\n\tcolor: white;\r\n\tbackground-color: rgba(255,57,52,0.5);\r\n}\r\n\r\n.login-error {\r\n\twidth:350px;\r\n}\r\n\r\n.mb-error-message svg{\r\n\tfill: currentColor;\r\n\tcursor: pointer;\r\n}", ""]);
+	
+	// exports
+
 
 /***/ },
 /* 68 */
@@ -38595,11 +38570,35 @@
 	  value: true
 	});
 	
-	var _loader = __webpack_require__(69);
+	var _angular = __webpack_require__(2);
+	
+	var _angular2 = _interopRequireDefault(_angular);
+	
+	var _loaderComponent = __webpack_require__(69);
+	
+	var _loaderComponent2 = _interopRequireDefault(_loaderComponent);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var LoaderModule = _angular2.default.module('loader-module', []).component('mbLoader', _loaderComponent2.default).name;
+	
+	exports.default = LoaderModule;
+
+/***/ },
+/* 69 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _loader = __webpack_require__(70);
 	
 	var _loader2 = _interopRequireDefault(_loader);
 	
-	__webpack_require__(70);
+	__webpack_require__(71);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -38610,19 +38609,19 @@
 	exports.default = LoaderComponent;
 
 /***/ },
-/* 69 */
+/* 70 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"slds-spinner_container\">\r\n  <div class=\"slds-spinner slds-spinner--medium\" role=\"alert\">\r\n\t<span class=\"slds-assistive-text\">Loading</span>\r\n\t<div class=\"slds-spinner__dot-a\"></div>\r\n\t<div class=\"slds-spinner__dot-b\"></div>\r\n  </div>\r\n</div>"
 
 /***/ },
-/* 70 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(71);
+	var content = __webpack_require__(72);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(16)(content, {});
@@ -38642,7 +38641,7 @@
 	}
 
 /***/ },
-/* 71 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(15)();
@@ -38656,7 +38655,7 @@
 
 
 /***/ },
-/* 72 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38669,7 +38668,7 @@
 	
 	var _angular2 = _interopRequireDefault(_angular);
 	
-	var _notificationComponent = __webpack_require__(73);
+	var _notificationComponent = __webpack_require__(74);
 	
 	var _notificationComponent2 = _interopRequireDefault(_notificationComponent);
 	
@@ -38680,7 +38679,7 @@
 	exports.default = NotificationModule;
 
 /***/ },
-/* 73 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38689,11 +38688,11 @@
 		value: true
 	});
 	
-	var _notification = __webpack_require__(74);
+	var _notification = __webpack_require__(75);
 	
 	var _notification2 = _interopRequireDefault(_notification);
 	
-	__webpack_require__(75);
+	__webpack_require__(76);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -38708,19 +38707,19 @@
 	exports.default = NotificationComponent;
 
 /***/ },
-/* 74 */
+/* 75 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"slds-notify_container\">\r\n  <div class=\"slds-notify slds-notify--toast\" role=\"alert\">\r\n    <span class=\"slds-assistive-text\">Info</span>\r\n    <button class=\"slds-button slds-notify__close slds-button--icon-inverse\" ng-click=\"$ctrl.hideNotification()\">\r\n      <svg aria-hidden=\"true\" class=\"slds-button__icon slds-button__icon--large\">\r\n        <use xlink:href=\"./assets/icons/utility-sprite/svg/symbols.svg#close\"></use>\r\n      </svg>\r\n      <span class=\"slds-assistive-text\">Close</span>\r\n    </button>\r\n    <div class=\"slds-notify__content\">\r\n      <h2 class=\"slds-text-heading--small\">{{$ctrl.notificationMessage}}</h2>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ },
-/* 75 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(76);
+	var content = __webpack_require__(77);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(16)(content, {});
@@ -38740,7 +38739,7 @@
 	}
 
 /***/ },
-/* 76 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(15)();
@@ -38752,30 +38751,6 @@
 	
 	// exports
 
-
-/***/ },
-/* 77 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _angular = __webpack_require__(2);
-	
-	var _angular2 = _interopRequireDefault(_angular);
-	
-	var _wrapperComponent = __webpack_require__(78);
-	
-	var _wrapperComponent2 = _interopRequireDefault(_wrapperComponent);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var WrapperModule = _angular2.default.module('wrapper-module', []).component('wrapper', _wrapperComponent2.default).name;
-	
-	exports.default = WrapperModule;
 
 /***/ },
 /* 78 */
@@ -38818,26 +38793,60 @@
 		value: true
 	});
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var WrapperController = function WrapperController($scope, $state) {
-		var _this = this;
+	var WrapperController = function () {
+		function WrapperController($scope, $state) {
+			var _this = this;
 	
-		_classCallCheck(this, WrapperController);
+			_classCallCheck(this, WrapperController);
 	
-		this.$scope = $scope;
-		this.$state = $state;
+			this.$scope = $scope;
+			this.$state = $state;
+			this.loading = false;
+			this.error = '';
+			this.notification = '';
 	
-		this.$scope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
-			_this.authError = error;
-			$state.go('login');
-		});
+			this.$scope.$on('startLoading', function () {
+				_this.$scope.$ctrl.loading = true;
+			});
+			this.$scope.$on('stopLoading', function () {
+				_this.$scope.$ctrl.loading = false;
+			});
+			this.$scope.$on('showError', function (name, errorMessage) {
+				_this.$scope.$ctrl.error = errorMessage;
+			});
+			this.$scope.$on('showNotification', function (name, message) {
+				_this.$scope.$ctrl.notification = message;
+			});
 	
-		this.$scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams, error) {
-			//will hide error when any state was changed successfully
-			_this.authError = "";
-		});
-	};
+			this.$scope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+				_this.authError = error;
+				$state.go('login');
+			});
+	
+			this.$scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams, error) {
+				//will hide error when any state was changed successfully
+				_this.authError = "";
+			});
+		}
+	
+		_createClass(WrapperController, [{
+			key: 'hideError',
+			value: function hideError() {
+				this.error = '';
+			}
+		}, {
+			key: 'hideNotification',
+			value: function hideNotification() {
+				this.notification = '';
+			}
+		}]);
+	
+		return WrapperController;
+	}();
 	
 	WrapperController.$inject = ['$scope', '$state'];
 	exports.default = WrapperController;
@@ -38846,7 +38855,7 @@
 /* 80 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"slds-m-top--large slds-align--absolute-center login-error slds-p-around--xx-small\" ng-if=\"$ctrl.authError\">{{$ctrl.authError}}</div>\r\n\t\t\t\t\t<ui-view></ui-view>"
+	module.exports = "<div class=\"slds-m-top--large slds-align--absolute-center login-error slds-p-around--xx-small\" ng-if=\"$ctrl.authError\">{{$ctrl.authError}}</div>\r\n<ui-view></ui-view>\r\n<mb-loader ng-if=\"$ctrl.loading\"></mb-loader>\r\n<mb-error ng-if=\"$ctrl.error\" error-message=\"$ctrl.error\" hide-error=\"$ctrl.hideError()\"></mb-error>\r\n<mb-notification ng-if=\"$ctrl.notification\" notification-message=\"$ctrl.notification\" hide-notification=\"$ctrl.hideNotification()\"></mb-notification>"
 
 /***/ },
 /* 81 */
