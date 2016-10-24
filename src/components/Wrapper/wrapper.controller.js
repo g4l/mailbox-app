@@ -5,18 +5,19 @@ class WrapperController {
 		this.loading = false;
 		this.error = '';
 		this.notification = '';
+		this.authError = '';
 		
 	    this.$scope.$on('startLoading', ()=>{
-			this.$scope.$ctrl.loading = true;
+			this.loading = true;
 	    });
-		this.$scope.$on('stopLoading', ()=>{
-			this.$scope.$ctrl.loading = false;
+		this.$scope.$on('stopLoading', ()=>{			
+			this.loading = false;
 		});
-		this.$scope.$on('showError', (name, errorMessage)=>{		
-			this.$scope.$ctrl.error = errorMessage;
+		this.$scope.$on('showError', (name, errorMessage)=>{					
+			this.error = errorMessage;
 		});
-		this.$scope.$on('showNotification', (name, message)=>{		
-			this.$scope.$ctrl.notification = message;
+		this.$scope.$on('showNotification', (name, message)=>{					
+			this.notification = message;
 		});
 		
 		this.$scope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => {					

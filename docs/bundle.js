@@ -37357,19 +37357,19 @@
 		_createClass(ContactsDataSvc, [{
 			key: 'getAllContacts',
 			value: function getAllContacts() {
-				return this.$http.get('//test-api.javascript.ru/v1/vmerkotan/users?delay=1000').then(function (response) {
+				return this.$http.get('http://test-api.javascript.ru/v1/vmerkotan/users?delay=1000').then(function (response) {
 					return response.data;
 				});
 			}
 		}, {
 			key: 'deleteContact',
 			value: function deleteContact(contactId) {
-				return this.$http.delete('//test-api.javascript.ru/v1/vmerkotan/users/' + contactId + '?delay=1000');
+				return this.$http.delete('http://test-api.javascript.ru/v1/vmerkotan/users/' + contactId + '?delay=1000');
 			}
 		}, {
 			key: 'createContact',
 			value: function createContact(contact) {
-				return this.$http.post('//test-api.javascript.ru/v1/vmerkotan/users/?delay=1000', contact).then(function (response) {
+				return this.$http.post('http://test-api.javascript.ru/v1/vmerkotan/users/?delay=1000', contact).then(function (response) {
 					return response.data;
 				});
 			}
@@ -37859,7 +37859,7 @@
 			key: 'getAllMails',
 			value: function getAllMails() {
 				if (!this.mails) {
-					this.mails = this.$http.get('//test-api.javascript.ru/v1/vmerkotan/letters?delay=1000').then(function (response) {
+					this.mails = this.$http.get('http://test-api.javascript.ru/v1/vmerkotan/letters?delay=1000').then(function (response) {
 						return response.data;
 					});
 				}
@@ -37869,7 +37869,7 @@
 			key: 'getAllMailboxes',
 			value: function getAllMailboxes() {
 				if (!this.mailboxes) {
-					this.mailboxes = this.$http.get('//test-api.javascript.ru/v1/vmerkotan/mailboxes?delay=1000').then(function (response) {
+					this.mailboxes = this.$http.get('http://test-api.javascript.ru/v1/vmerkotan/mailboxes?delay=1000').then(function (response) {
 						return response.data;
 					});
 				}
@@ -37878,19 +37878,19 @@
 		}, {
 			key: 'deleteMail',
 			value: function deleteMail(letterId) {
-				return this.$http.delete('//test-api.javascript.ru/v1/vmerkotan/letters/' + letterId + '?delay=1000');
+				return this.$http.delete('http://test-api.javascript.ru/v1/vmerkotan/letters/' + letterId + '?delay=1000');
 			}
 		}, {
 			key: 'moveToTrash',
 			value: function moveToTrash(letterId, letter) {
 				this.mails = null;
-				return this.$http.patch('//test-api.javascript.ru/v1/vmerkotan/letters/' + letterId + '?delay=1000', letter);
+				return this.$http.patch('http://test-api.javascript.ru/v1/vmerkotan/letters/' + letterId + '?delay=1000', letter);
 			}
 		}, {
 			key: 'saveLetter',
 			value: function saveLetter(mail) {
 				this.mails = null;
-				return this.$http.post('//test-api.javascript.ru/v1/vmerkotan/letters/?delay=1000', mail);
+				return this.$http.post('http://test-api.javascript.ru/v1/vmerkotan/letters/?delay=1000', mail);
 			}
 		}]);
 	
@@ -38810,16 +38810,19 @@
 			this.notification = '';
 	
 			this.$scope.$on('startLoading', function () {
-				_this.$scope.$ctrl.loading = true;
+				_this.loading = true;
 			});
 			this.$scope.$on('stopLoading', function () {
-				_this.$scope.$ctrl.loading = false;
+				//this.$scope.$ctrl.loading = false;
+				_this.loading = false;
 			});
 			this.$scope.$on('showError', function (name, errorMessage) {
-				_this.$scope.$ctrl.error = errorMessage;
+				//this.$scope.$ctrl.error = errorMessage;
+				_this.error = errorMessage;
 			});
 			this.$scope.$on('showNotification', function (name, message) {
-				_this.$scope.$ctrl.notification = message;
+				//this.$scope.$ctrl.notification = message;
+				_this.notification = message;
 			});
 	
 			this.$scope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
