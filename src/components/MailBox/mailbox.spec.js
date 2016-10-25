@@ -4,105 +4,96 @@ import MailboxController from './mailbox.controller.js'
 import MailboxTemplate from './mailbox.html';
 
 describe('Mailbox module', () => {
-	let makeController, $rootScope, $scope, $state, $log, MailsDataSvc;
+	let makeController, $rootScope, $scope, $state, $log, MailsDataSvc, $httpBackend;
   let fakeMailboxes = [{"_id":"1","title":"sent"},{"_id":"2","title":"inbox"}]
+	let mockLetters = [{"_id":"1","subject":"subject","mailbox":"1","body":"body","to":"me@test.com"},
+			{"_id":"2","subject":"subject_2","mailbox":"2","body":"body_2","to":"me@test.com"}];
+	let mockDeleteResponse = {data: "ok", status: 200, statusText: "OK"};
   beforeEach(window.module(MailboxModule));
-	beforeEach(inject(( _$rootScope_, _$log_, _MailsDataSvc_, $q) => {
+	beforeEach(inject(( _$rootScope_, _$log_, _MailsDataSvc_, $q, _$httpBackend_) => {
 		$scope = _$rootScope_.$new();
 		$rootScope = _$rootScope_;
     MailsDataSvc = _MailsDataSvc_;
+		$httpBackend = _$httpBackend_;
 		makeController = () => {
 			return new MailboxController( $scope, $log, MailsDataSvc );
 		}
     spyOn($scope, "$emit");
     spyOn(MailsDataSvc, 'getAllMailboxes').and.returnValue($q.resolve(fakeMailboxes));
+
+    $httpBackend.whenGET('//test-api.javascript.ru/v1/vmerkotan/letters?delay=1000')
+			.respond(mockLetters);
+		$httpBackend.whenDELETE('//test-api.javascript.ru/v1/vmerkotan/letters/1?delay=1000')
+				.respond(mockDeleteResponse);
+		$httpBackend.whenPATCH('//test-api.javascript.ru/v1/vmerkotan/letters/1?delay=1000', mockLetters[0])
+				.respond(mockLetters[0]);
+		$httpBackend.whenPOST('//test-api.javascript.ru/v1/vmerkotan/letters/?delay=1000', mockLetters[0])
+				.respond(mockLetters[0]);
 	}));
 
-	describe('Controller', () => {
+		describe('Controller', () => {
 
-		it("when controller initiates 'startLoading' event should fire", () => {
-			let controller = makeController();
-      expect($scope.$emit).toHaveBeenCalledWith("startLoading");
-		})
-    it("when controller initiates MailsDataSvc.getAllMailboxes() should be called", () => {
-			let controller = makeController();
-      expect(MailsDataSvc.getAllMailboxes).toHaveBeenCalled();
-		})
-})
-/*
-		it("when 'startLoading' event fires, 'loading' property should be changed to true", () => {
-			let controller = makeController();
-			$rootScope.$broadcast('startLoading');
-			expect(controller.loading).toEqual(true);
-		})
+			it("when controller initiates 'startLoading' event should fire", () => {
+				let controller = makeController();
+	      expect($scope.$emit).toHaveBeenCalledWith("startLoading");
+			})
+	    it("when controller initiates MailsDataSvc.getAllMailboxes() should be called", () => {
+				let controller = makeController();
+	      expect(MailsDataSvc.getAllMailboxes).toHaveBeenCalled();
+			})
+	})
 
-		it("when 'stopLoading' event fires, 'loading' property should be changed to false", () => {
-			let controller = makeController();
-			controller.loading = true;
-			$rootScope.$broadcast('stopLoading');
-			expect(controller.loading).toEqual(false);
+	describe('MailsDataSvc', () => {
+		it("when invoke getAllMailboxes() list of mailboxes should return", (done) => {
+			MailsDataSvc.getAllMailboxes().then(mailboxes => {
+				expect(mailboxes).toEqual(fakeMailboxes);
+				done();
+			});
+			$httpBackend.flush();
 		})
 
-		it("when 'showError' event fires, 'error' property should be changed to passed message", () => {
-			let errorMessage = 'error';
-			let controller = makeController();
-			$rootScope.$broadcast('showError', errorMessage);
-			expect(controller.error).toEqual(errorMessage);
+		it("when invoke getAllMails() list of mails should return", (done) => {
+			MailsDataSvc.getAllMails().then(letters => {
+				expect(letters).toEqual(mockLetters);
+				done();
+			});
+			$httpBackend.flush();
 		})
 
-		it("when 'hideError'  function invokes then error property should become empty", () => {
-			let controller = makeController();
-			controller.error = "error";
-			controller.hideError();
-			expect(controller.error).toEqual("");
+		it("when invoke deleteMail(letterId) delete response should be returned", (done) => {
+			MailsDataSvc.deleteMail(1).then(response => {
+				expect(response.data).toEqual(mockDeleteResponse);
+				done();
+			});
+			$httpBackend.flush();
 		})
 
-		it("when 'showNotification' event fires, then 'notification' property should be changed to passed message", () => {
-			let notificationMessage = "notification";
-			let controller = makeController();
-			$rootScope.$broadcast('showNotification', notificationMessage);
-			expect(controller.notification).toEqual(notificationMessage);
+		it("when invoke moveToTrash(letterId, letter) updated letter should be returned", (done) => {
+			MailsDataSvc.moveToTrash(1, mockLetters[0]).then(response => {
+				expect(response.data).toEqual(mockLetters[0]);
+				done();
+			});
+			$httpBackend.flush();
 		})
-
-		it("when 'hideNotification'  function invokes then notification property should become empty", () => {
-			let controller = makeController();
-			controller.notification = "notification";
-			controller.hideNotification();
-			expect(controller.notification).toEqual("");
-		})
-
-		it("when '$stateChangeError' event fires, then $state.go('login') should be called", () =>{
-			let controller = makeController();
-			$rootScope.$broadcast('$stateChangeError');
-			expect($state.go).toHaveBeenCalledWith("login");
-
-		})
-
-		it("when '$stateChangeError' event fires, then authError property should be changed to error message", () =>{
-			let controller = makeController();
-			let authErrorMessage = "auth error";
-			$rootScope.$broadcast('$stateChangeError', null, null, null, null, authErrorMessage);
-			expect(controller.authError).toEqual(authErrorMessage);
-		})
-
-		it("when '$stateChangeSuccess' event fires, then authError property should become empty", () =>{
-			let controller = makeController();
-			controller.authError = "auth error";
-			$rootScope.$broadcast('$stateChangeSuccess');
-			expect(controller.authError).toEqual("");
+		it("when invoke saveLetter(letter) passed in letter should be returned", (done) => {
+			MailsDataSvc.saveLetter(mockLetters[0]).then(response => {
+				expect(response.data).toEqual(mockLetters[0]);
+				done();
+			});
+			$httpBackend.flush();
 		})
 	})
 
 	describe('Component', () => {
-	  let component = WrapperComponent;
+	  let component = MailboxComponent;
 
 	  it('includes the intended template',() => {
-        expect(component.template).toEqual(WrapperTemplate);
-      });
+    	expect(component.template).toEqual(MailboxTemplate);
+    });
 
-      it('invokes the right controller', () => {
-        expect(component.controller).toEqual(WrapperController);
-      });
+    it('invokes the right controller', () => {
+      expect(component.controller).toEqual(MailboxController);
+    });
 	})
-*/
+
 })
