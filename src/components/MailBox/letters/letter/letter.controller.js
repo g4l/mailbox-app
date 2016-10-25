@@ -30,11 +30,12 @@ class LetterController {
 		this.$scope.$emit('deleteLetter', letterId);
 		this.goBack();
 		this.deleting = false;
+		this.$scope.$emit('showNotification', notificatoinMessage);
 	}
 
 	unsuccessfulDelete(error) {
 		this.$log.error("letter component error in deleteMail >>>>>", error);
-		this.$state.go('^');
+		this.goBack();
 		this.deleting = false;
 		this.$scope.$emit('showError', error.status + ' ' + error.statusText);
 	}
