@@ -37357,19 +37357,19 @@
 		_createClass(ContactsDataSvc, [{
 			key: 'getAllContacts',
 			value: function getAllContacts() {
-				return this.$http.get('http://test-api.javascript.ru/v1/vmerkotan/users?delay=1000').then(function (response) {
+				return this.$http.get('//test-api.javascript.ru/v1/vmerkotan/users?delay=1000').then(function (response) {
 					return response.data;
 				});
 			}
 		}, {
 			key: 'deleteContact',
 			value: function deleteContact(contactId) {
-				return this.$http.delete('http://test-api.javascript.ru/v1/vmerkotan/users/' + contactId + '?delay=1000');
+				return this.$http.delete('//test-api.javascript.ru/v1/vmerkotan/users/' + contactId + '?delay=1000');
 			}
 		}, {
 			key: 'createContact',
 			value: function createContact(contact) {
-				return this.$http.post('http://test-api.javascript.ru/v1/vmerkotan/users/?delay=1000', contact).then(function (response) {
+				return this.$http.post('//test-api.javascript.ru/v1/vmerkotan/users/?delay=1000', contact).then(function (response) {
 					return response.data;
 				});
 			}
@@ -37859,7 +37859,7 @@
 			key: 'getAllMails',
 			value: function getAllMails() {
 				if (!this.mails) {
-					this.mails = this.$http.get('http://test-api.javascript.ru/v1/vmerkotan/letters?delay=1000').then(function (response) {
+					this.mails = this.$http.get('//test-api.javascript.ru/v1/vmerkotan/letters?delay=1000').then(function (response) {
 						return response.data;
 					});
 				}
@@ -37869,7 +37869,7 @@
 			key: 'getAllMailboxes',
 			value: function getAllMailboxes() {
 				if (!this.mailboxes) {
-					this.mailboxes = this.$http.get('http://test-api.javascript.ru/v1/vmerkotan/mailboxes?delay=1000').then(function (response) {
+					this.mailboxes = this.$http.get('//test-api.javascript.ru/v1/vmerkotan/mailboxes?delay=1000').then(function (response) {
 						return response.data;
 					});
 				}
@@ -37878,19 +37878,19 @@
 		}, {
 			key: 'deleteMail',
 			value: function deleteMail(letterId) {
-				return this.$http.delete('http://test-api.javascript.ru/v1/vmerkotan/letters/' + letterId + '?delay=1000');
+				return this.$http.delete('//test-api.javascript.ru/v1/vmerkotan/letters/' + letterId + '?delay=1000');
 			}
 		}, {
 			key: 'moveToTrash',
 			value: function moveToTrash(letterId, letter) {
 				this.mails = null;
-				return this.$http.patch('http://test-api.javascript.ru/v1/vmerkotan/letters/' + letterId + '?delay=1000', letter);
+				return this.$http.patch('//test-api.javascript.ru/v1/vmerkotan/letters/' + letterId + '?delay=1000', letter);
 			}
 		}, {
 			key: 'saveLetter',
 			value: function saveLetter(mail) {
 				this.mails = null;
-				return this.$http.post('http://test-api.javascript.ru/v1/vmerkotan/letters/?delay=1000', mail);
+				return this.$http.post('//test-api.javascript.ru/v1/vmerkotan/letters/?delay=1000', mail);
 			}
 		}]);
 	
@@ -38341,34 +38341,35 @@
 				this.$state.go('^');
 			}
 		}, {
+			key: 'successfulDelete',
+			value: function successfulDelete(letterId, notificatoinMessage) {
+				this.$scope.$emit('deleteLetter', letterId);
+				goBack();
+				this.deleting = false;
+			}
+		}, {
+			key: 'unsuccessfulDelete',
+			value: function unsuccessfulDelete(error) {
+				this.$log.error("letter component error in deleteMail >>>>>", error);
+				this.$state.go('^');
+				this.deleting = false;
+				this.$scope.$emit('showError', error.status + ' ' + error.statusText);
+			}
+		}, {
 			key: 'deleteMail',
 			value: function deleteMail(letterId) {
-				var _this2 = this;
-	
 				this.deleting = true;
 				if (this.letter.mailbox == this.trashMailbox._id) {
 					this.MailsDataSvc.deleteMail(this.letter._id).then(function () {
-						_this2.$scope.$emit('deleteLetter', letterId);
-						_this2.$state.go('^');
-						_this2.deleting = false;
-						_this2.$scope.$emit('showNotification', "Letter was deleted successfully.");
+						successfulDelete(letterId, "Letter was deleted successfully.");
 					}).catch(function (error) {
-						_this2.$log.error("letter component error in deleteMail >>>>>", error);
-						_this2.$state.go('^');
-						_this2.deleting = false;
-						_this2.$scope.$emit('showError', error.status + ' ' + error.statusText);
+						unsuccessfulDelete(error);
 					});
 				} else {
 					this.MailsDataSvc.moveToTrash(this.letter._id, { mailbox: this.trashMailbox._id }).then(function () {
-						_this2.$scope.$emit('deleteLetter', letterId);
-						_this2.$state.go('^');
-						_this2.deleting = false;
-						_this2.$scope.$emit('showNotification', "Letter was moved to trash mailbox successfully.");
+						successfulDelete(letterId, "Letter was moved to trash mailbox successfully.");
 					}).catch(function (error) {
-						_this2.$log.error("letter component error in moveToTrash >>>>>", error);
-						_this2.$state.go('^');
-						_this2.deleting = false;
-						_this2.$scope.$emit('showError', error.status + ' ' + error.statusText);
+						unsuccessfulDelete(error);
 					});
 				}
 			}
@@ -38808,20 +38809,18 @@
 			this.loading = false;
 			this.error = '';
 			this.notification = '';
+			this.authError = '';
 	
 			this.$scope.$on('startLoading', function () {
 				_this.loading = true;
 			});
 			this.$scope.$on('stopLoading', function () {
-				//this.$scope.$ctrl.loading = false;
 				_this.loading = false;
 			});
 			this.$scope.$on('showError', function (name, errorMessage) {
-				//this.$scope.$ctrl.error = errorMessage;
 				_this.error = errorMessage;
 			});
 			this.$scope.$on('showNotification', function (name, message) {
-				//this.$scope.$ctrl.notification = message;
 				_this.notification = message;
 			});
 	
