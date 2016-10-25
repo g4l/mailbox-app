@@ -10,11 +10,10 @@ describe('Create Letter module', () => {
 			{"_id":"2","subject":"subject_2","mailbox":"2","body":"body_2","to":"me@test.com"}];
 
   beforeEach(window.module(MailboxModule));
-	beforeEach(inject(( _$rootScope_, _$log_, _MailsDataSvc_, $q, _$httpBackend_) => {
+	beforeEach(inject(( _$rootScope_, _$log_, _MailsDataSvc_, $q) => {
 		$scope = _$rootScope_.$new();
 		$rootScope = _$rootScope_;
     MailsDataSvc = _MailsDataSvc_;
-		$httpBackend = _$httpBackend_;
 		makeController = () => {
 			return new CreateLetterController( $scope, MailsDataSvc );
 		}

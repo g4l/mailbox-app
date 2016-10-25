@@ -5,5 +5,5 @@ import LetterModule from './letter/letter.module.js';
 let LettersModule = angular.module('letters-module', [LetterModule])
 	.component('letters', LettersComponent)
 	.name;
-	
+
 export default LettersModule;
