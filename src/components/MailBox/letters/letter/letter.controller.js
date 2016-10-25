@@ -26,11 +26,11 @@ class LetterController {
 		this.$state.go('^');
 	}
 
-	successfulDelete(letterId, notificatoinMessage) {
+	successfulDelete(letterId, notificationMessage) {
 		this.$scope.$emit('deleteLetter', letterId);
 		this.goBack();
 		this.deleting = false;
-		this.$scope.$emit('showNotification', notificatoinMessage);
+		this.$scope.$emit('showNotification', notificationMessage);
 	}
 
 	unsuccessfulDelete(error) {
@@ -51,7 +51,7 @@ class LetterController {
 			});
 		} else {
 			this.MailsDataSvc.moveToTrash(this.letter._id, { mailbox: this.trashMailbox._id }).then( () => {
-				this.successfulDelete(letterId,"Letter was moved to trash mailbox successfully.");
+				this.successfulDelete(letterId, "Letter was moved to trash mailbox successfully.");
 			})
 			.catch(error => {
 				this.unsuccessfulDelete(error);

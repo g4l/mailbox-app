@@ -23,6 +23,8 @@ describe('Mailbox module', () => {
 
     $httpBackend.whenGET('//test-api.javascript.ru/v1/vmerkotan/letters?delay=1000')
 			.respond(mockLetters);
+		$httpBackend.whenGET('//test-api.javascript.ru/v1/vmerkotan/mailboxes?delay=1000')
+				.respond(fakeMailboxes);
 		$httpBackend.whenDELETE('//test-api.javascript.ru/v1/vmerkotan/letters/1?delay=1000')
 				.respond(mockDeleteResponse);
 		$httpBackend.whenPATCH('//test-api.javascript.ru/v1/vmerkotan/letters/1?delay=1000', mockLetters[0])

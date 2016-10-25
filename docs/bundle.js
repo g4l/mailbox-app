@@ -38342,11 +38342,11 @@
 			}
 		}, {
 			key: 'successfulDelete',
-			value: function successfulDelete(letterId, notificatoinMessage) {
+			value: function successfulDelete(letterId, notificationMessage) {
 				this.$scope.$emit('deleteLetter', letterId);
 				this.goBack();
 				this.deleting = false;
-				this.$scope.$emit('showNotification', notificatoinMessage);
+				this.$scope.$emit('showNotification', notificationMessage);
 			}
 		}, {
 			key: 'unsuccessfulDelete',
