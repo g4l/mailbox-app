@@ -38344,7 +38344,7 @@
 			key: 'successfulDelete',
 			value: function successfulDelete(letterId, notificatoinMessage) {
 				this.$scope.$emit('deleteLetter', letterId);
-				goBack();
+				this.goBack();
 				this.deleting = false;
 			}
 		}, {
@@ -38358,18 +38358,20 @@
 		}, {
 			key: 'deleteMail',
 			value: function deleteMail(letterId) {
+				var _this2 = this;
+	
 				this.deleting = true;
 				if (this.letter.mailbox == this.trashMailbox._id) {
 					this.MailsDataSvc.deleteMail(this.letter._id).then(function () {
-						successfulDelete(letterId, "Letter was deleted successfully.");
+						_this2.successfulDelete(letterId, "Letter was deleted successfully.");
 					}).catch(function (error) {
-						unsuccessfulDelete(error);
+						_this2.unsuccessfulDelete(error);
 					});
 				} else {
 					this.MailsDataSvc.moveToTrash(this.letter._id, { mailbox: this.trashMailbox._id }).then(function () {
-						successfulDelete(letterId, "Letter was moved to trash mailbox successfully.");
+						_this2.successfulDelete(letterId, "Letter was moved to trash mailbox successfully.");
 					}).catch(function (error) {
-						unsuccessfulDelete(error);
+						_this2.unsuccessfulDelete(error);
 					});
 				}
 			}
