@@ -23,8 +23,7 @@ describe('Letters module', () => {
 	}));
 
 		describe('Controller', () => {
-			//failes test from mailbox.spec.js
-			xit("when controller initiates, MailsDataSvc.getAllMails() should be invoked", () => {
+			it("when controller initiates, MailsDataSvc.getAllMails() should be invoked", () => {
 				let controller = makeController();
 				expect(MailsDataSvc.getAllMails).toHaveBeenCalled();
 			})

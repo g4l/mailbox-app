@@ -5,20 +5,21 @@ import LetterTemplate from './letter.html';
 import uiRouter from 'angular-ui-router';
 
 describe('Letter module', () => {
-	let makeController, $rootScope, $scope, $log, MailsDataSvc, $state, $httpBackend;
+	let makeController, $rootScope, $scope, $log, MailsDataSvc, $state, $httpBackend, $q;
 	let mockLetters = [{"_id":"1","subject":"subject","mailbox":"1","body":"body","to":"me@test.com"},
 			{"_id":"2","subject":"subject_2","mailbox":"2","body":"body_2","to":"me@test.com"}];
 	let mockMailboxes = [{"_id":"1","title":"sent"},{"_id":"2","title":"trash"}]
 
   beforeEach(window.module(MailboxModule));
 	beforeEach(window.module(uiRouter));
-	beforeEach(inject(( _$rootScope_, _$log_, _MailsDataSvc_, $q, _$state_, _$httpBackend_) => {
+	beforeEach(inject(( _$rootScope_, _$log_, _MailsDataSvc_, _$q_, _$state_, _$httpBackend_) => {
 		$scope = _$rootScope_.$new();
 		$rootScope = _$rootScope_;
     MailsDataSvc = _MailsDataSvc_;
 		$log = _$log_;
 		$state = _$state_;
 		$httpBackend = _$httpBackend_;
+		$q = _$q_;
 		makeController = () => {
 			return new LetterController( $state, $scope, $log, MailsDataSvc );
 		}
@@ -43,6 +44,10 @@ describe('Letter module', () => {
 
 			it("when controller initiates, trashMailbox variable should be initiates with mailbox with title = 'trash'", () => {
 				let controller = makeController();
+				controller.MailsDataSvc.getAllMailboxes = () => {
+					return $q.resolve(mockMailboxes);
+				}
+				controller.getData();
 				expect(controller.trashMailbox).toEqual(mockMailboxes[1]);
 			})
 
