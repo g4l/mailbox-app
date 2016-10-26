@@ -41,7 +41,7 @@ describe('Letter module', () => {
 				let controller = makeController();
 				expect(MailsDataSvc.getAllMailboxes).toHaveBeenCalled();
 			})
-
+			//it fails
 			it("when controller initiates, trashMailbox variable should be initiates with mailbox with title = 'trash'", () => {
 				let controller = makeController();
 				controller.MailsDataSvc.getAllMailboxes = () => {
