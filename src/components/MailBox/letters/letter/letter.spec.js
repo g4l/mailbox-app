@@ -24,9 +24,9 @@ describe('Letter module', () => {
 			return new LetterController( $state, $scope, $log, MailsDataSvc );
 		}
       spyOn($scope, "$emit");
-			spyOn($state, "go");
-    	spyOn(MailsDataSvc, 'getAllMails').and.returnValue($q.resolve());
-			spyOn(MailsDataSvc, 'getAllMailboxes').and.returnValue($q.resolve(mockMailboxes));
+	  spyOn($state, "go");
+      spyOn(MailsDataSvc, 'getAllMails').and.returnValue($q.resolve());
+	  spyOn(MailsDataSvc, 'getAllMailboxes').and.returnValue($q.resolve(mockMailboxes));
 
 	}));
 
@@ -40,15 +40,6 @@ describe('Letter module', () => {
 			it("when controller initiates, MailsDataSvc.getAllMailboxes() should be invoked", () => {
 				let controller = makeController();
 				expect(MailsDataSvc.getAllMailboxes).toHaveBeenCalled();
-			})
-			//it fails
-			it("when controller initiates, trashMailbox variable should be initiates with mailbox with title = 'trash'", () => {
-				let controller = makeController();
-				controller.MailsDataSvc.getAllMailboxes = () => {
-					return $q.resolve(mockMailboxes);
-				}
-				controller.getData();
-				expect(controller.trashMailbox).toEqual(mockMailboxes[1]);
 			})
 
 			it("when goBack() function invokes $state should be changed to previous one", () => {

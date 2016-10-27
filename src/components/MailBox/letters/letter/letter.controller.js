@@ -8,19 +8,35 @@ class LetterController {
 		this.letter = {};
 		this.trashMailbox = {};
 		this.sentMailbox = {};
-		this.getData();
+		//this.getData();
+		this._getLetters();
+		this._getMailboxes();
 	}
 
-	getData() {
-		this.MailsDataSvc.getAllMails().then(letters => {
-			this.letter = letters.find(i => i._id == this.letterId)
-		})
-		this.MailsDataSvc.getAllMailboxes()
+	_getMailboxes() {
+		return this.MailsDataSvc.getAllMailboxes()
 			.then(mailboxes => {
 				this.trashMailbox = mailboxes.find(i => i.title.toUpperCase() == 'TRASH')
 				this.sentMailbox = mailboxes.find(i => i.title.toUpperCase() == 'SENT')
 		})
 	}
+
+	_getLetters() {
+		return this.MailsDataSvc.getAllMails().then(letters => {
+			this.letter = letters.find(i => i._id == this.letterId)
+		})
+	}
+
+	// getData() {
+	// 	this.MailsDataSvc.getAllMails().then(letters => {
+	// 		this.letter = letters.find(i => i._id == this.letterId)
+	// 	})
+	// 	this.MailsDataSvc.getAllMailboxes()
+	// 		.then(mailboxes => {
+	// 			this.trashMailbox = mailboxes.find(i => i.title.toUpperCase() == 'TRASH')
+	// 			this.sentMailbox = mailboxes.find(i => i.title.toUpperCase() == 'SENT')
+	// 	})
+	// }
 
 	goBack() {
 		this.$state.go('^');
