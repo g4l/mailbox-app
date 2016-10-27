@@ -16,9 +16,10 @@ var config = {
     module: {
     loaders: [
       { test: /\.js/, exclude: /node_modules/, loaders: ['babel'] },
-	  { test: /\.html$/, loader: 'raw' },
-	  { test: /\.css$/, loader: 'style!css' },
-	  { test: /(eot|ttf|woff|woff2)$/, loader: 'file?name=fonts/webfonts/[name].[ext]' }
+      { test: /\.html$/, loader: 'raw' },
+      { test: /\.css$/, loader: 'style!css' },
+      { test: /(eot|ttf|woff|woff2)$/, loader: 'file?name=fonts/webfonts/[name].[ext]' },
+      { test: /\.svg$/, loader: 'svg-inline' }
     ]
   },
   
