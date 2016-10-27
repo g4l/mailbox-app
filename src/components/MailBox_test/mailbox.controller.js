@@ -5,7 +5,7 @@ class MailBoxController {
 	}
 	
 	getAllMailBoxes() {		
-		this.MailsDataSvc.getAllMailboxes()
+		return this.MailsDataSvc.getAllMailboxes()
         .then(mailboxes => {
           this.mailboxes = mailboxes;
         })
