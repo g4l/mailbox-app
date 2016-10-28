@@ -17,7 +17,7 @@ To see demo in your browser, please follow one of the next links and pass author
 
 1. Navigate to the project directory and run: `npm install`, wait until all dependencies will be installed.
 
-2. To compile package files execute: `npm build`. In docs folber bundle files will be present.
+2. To compile package files execute: `npm run build`. In docs folber bundle files will be present.
 
 ## Unit testing
 
