@@ -2,7 +2,7 @@
 
 This is a single page application for managing emails and contacts.
 
-> Note: in this test version, there is no real postal service on the server. Thus, new messages will not be sent to recipients. They will be just saved in the sent mail directory on the server.
+> Note: this is test version, there is no real postal service on the server. Thus, new messages will not be sent to recipients. They will be just saved in the sent mail directory on the server.
 
 ## Demo
 
