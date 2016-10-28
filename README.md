@@ -2,16 +2,14 @@
 
 This is a single page application for managing emails and contacts.
 
-> Note: this is test version, there is no real postal service on the server. Thus, new messages will not be sent to recipients. They will be just saved in the sent mail directory on the server.
+> Note: this is test version, there is no real postal service on the server. Thus, new messages will not be sent to recipients. They will be just saved in the sent mail directory.
 
 ## Demo
 
-To see demo in your browser, please follow one of the next links and pass authorization with this login/password:
+[Demo](https://vad1m198.github.io/mailbox-app/ "Direct link")
 
 - login: `me@test.com`
 - password: `qwerty`
-
-[Demo](https://vad1m198.github.io/mailbox-app/ "Direct link")
 
 ## Installation
 
